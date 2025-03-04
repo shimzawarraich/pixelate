@@ -19,8 +19,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
         minLength: 6
-    }
+    },
+    posts:[{type: mongoose.Types.ObjectId, ref:"Post", required:true}]
 
 
 });
 export default mongoose.model("User", userSchema);
+// users
