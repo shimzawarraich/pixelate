@@ -2,8 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import router from './routes/user-routes.js';
 import postRouter from './routes/post-routes.js';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use("/api/user", router); // optional add next to this, http://localhost:3000/api/user/logon
 app.use("/api/post", postRouter);
