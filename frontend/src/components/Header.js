@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import{AppBar, Toolbar, Typography, Box, Button, Tabs, Tab } from '@mui/material'
 import { Link } from 'react-router-dom'; 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginActions } from '../store';
 
 
 const Header = () => {
+    const dispath = useDispatch();
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     const [value, setValue] = useState()
   return (
@@ -60,6 +62,17 @@ const Header = () => {
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
+                        <Tab 
+                            LinkComponent={Link} 
+                            to="/posts/add" 
+                            label="Add Posts"
+                            sx={{
+                                fontFamily: "'Poppins', cusrive",
+                                fontSize: "1rem", 
+                                color: "#fff", 
+                                "&:hover": {color: "#FF8FAB"}, 
+                            }}
+                        />
                     </Tabs>
                 </Box>}
 
@@ -99,7 +112,8 @@ const Header = () => {
             </>
         }
                 { isLoggedIn && 
-                    <Button 
+                    <Button
+                        onClick={()=>dispath(loginActions.logout())}
                         LinkComponent={Link} 
                         to="/Login" 
                         variant="contained" 
