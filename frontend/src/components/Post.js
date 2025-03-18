@@ -16,8 +16,20 @@ const Post = ({title, description, imageURL, userName, isUser, id}) => {
     return data
   }
   const handleDelete = () => {
-    deleteRequest().then((data) => console.log(data));
+    deleteRequest()
+    .then(()=>navigate("/"))
+    .then(()=>navigate('/posts'));
   }
+  const handleFavoriteToggle = async() => {
+    try {
+      const response = await axios.post(`http://localhost:3000/api/post/${id}/favorite`);
+      setIsFavorite((prev) => !prev); // Toggle favorite state
+      // Optionally, you can send this information to a backend (like saving it in the DB)
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
+  };
+
   return (
     <div><Card sx={{ 
          width: "50%", 
@@ -42,6 +54,16 @@ const Post = ({title, description, imageURL, userName, isUser, id}) => {
         </IconButton>
       </Box>
     )}
+
+    {/* Heart Icon Button */}
+    <IconButton onClick={handleFavoriteToggle} sx={{ position: 'absolute', bottom: 10, right: 10 }}>
+      {isFavorite ? (
+        <FavoriteIcon color='error' />  // Filled heart when favorite
+      ) : (
+        <FavoriteBorderIcon color='error' />  // Empty heart when not favorite
+      )}
+    </IconButton>
+
     <CardHeader
       avatar={
         <Avatar sx={{ bgcolor: "#FF69B4" }} aria-label="recipe">
@@ -49,7 +71,7 @@ const Post = ({title, description, imageURL, userName, isUser, id}) => {
         </Avatar>
       }
       title={title}
-      subheader="September 14, 2016"
+      subheader="Fashionista"
     />
     <CardMedia
       component="img"
@@ -59,6 +81,8 @@ const Post = ({title, description, imageURL, userName, isUser, id}) => {
       sx={{borderRadius: "10px"}}
     />
     <CardContent>
+      <hr />
+      <br />
       <Typography variant="body2" sx={{ color: 'textSecondary' }}>
         <b>{userName}{":"}</b> {description}
       </Typography>
