@@ -27,16 +27,19 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   };
 
   const handleDelete = () => {
-    deleteRequest().then((data) => console.log(data));
-  }
+    deleteRequest()
+        .then(() => navigate('/posts')) // ✅ Redirect after deleting
+        .catch((error) => console.error("Error deleting post:", error));
+  };
 
   // Toggle favorite state
-  const handleFavoriteToggle = async() => {
+  const handleFavoriteToggle = async () => {
+    setLoading(true);
     try {
         const response = await axios.patch(`http://localhost:3000/api/post/${id}/favorite`);
         console.log("Favorite API Response:", response.data); // ✅ Debugging
 
-        if (response.data && typeof response.data.isFavorite !== "undefined") {
+        if (response.data && response.data.isFavorite !== undefined) {
             setIsFavorite(response.data.isFavorite); // ✅ Ensure state updates correctly
             setLikes(response.data.likes); // ✅ Update likes count
         } else {
@@ -44,9 +47,10 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
         }
     } catch (error) {
         console.error("Error toggling favorite:", error);
+    } finally {
+        setLoading(false); // ✅ Ensures button re-enables even if an error occurs
     }
-    setLoading(false);
-};
+  };
 
   return (
     <Card
@@ -83,29 +87,29 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
         <Typography variant="body2">{likes}</Typography>
       </Box>
 
-    <CardHeader
-      avatar={
-        <Avatar sx={{ bgcolor: "#FF69B4" }} aria-label="recipe">
-          {userName.charAt(0)}
-        </Avatar>
-      }
-      title={title}
-      subheader="September 14, 2016"
-    />
-    <CardMedia
-      component="img"
-      height="200"
-      image={imageURL}
-      alt="post image"
-      sx={{borderRadius: "10px"}}
-    />
-    <CardContent>
-      <Typography variant="body2" sx={{ color: 'textSecondary' }}>
-        <b>{userName}{":"}</b> {description}
-      </Typography>
-    </CardContent>
-  </Card></div>
-  )
-}
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: "#FF69B4" }} aria-label="recipe">
+            {userName.charAt(0)}
+          </Avatar>
+        }
+        title={title}
+        subheader="September 14, 2016"
+      />
+      <CardMedia
+        component="img"
+        height="200"
+        image={imageURL}
+        alt="post image"
+        sx={{borderRadius: "10px"}}
+      />
+      <CardContent>
+        <Typography variant="body2" sx={{ color: 'textSecondary' }}>
+          <b>{userName}{":"}</b> {description}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default Post;
