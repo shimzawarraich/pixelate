@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { TextField, Typography, Box, InputLabel, Button } from '@mui/material';
 import axios from "axios"; 
+import { useNavigate } from "react-router-dom";
 
 
 const labelStyles ={mb:1, mt:2, fontSize: '24px', fontWeight: 'bold', color: "#FF69B4"}
 const AddBlog = () => {
+    const navigate = useNavigate()
     const [inputs, setinputs] = useState({
             title:"", 
             description:"",
@@ -22,7 +24,8 @@ const AddBlog = () => {
             description: inputs.description,
             image: inputs.imageURL, 
             user: localStorage.getItem("userId")
-        }).catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
         const data = await res.data;
         return data
     }
@@ -30,6 +33,7 @@ const AddBlog = () => {
         e.preventDefault();
         console.log(inputs); 
         sendRequest().then(data=>console.log(data))
+        .then(()=>navigate('/posts'));
     }
     return (<div>
         <form onSubmit={handleSubmit}>
