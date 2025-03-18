@@ -18,6 +18,10 @@ const postSchema = new Schema ({
         ref: "User",
         required: true,
     },
+    isFavorite: { 
+        type: Boolean, default: false // Add this field for favorite status
+    },
+
 });
 
 export default mongoose.model("Post", postSchema);

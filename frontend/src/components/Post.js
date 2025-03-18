@@ -1,17 +1,24 @@
 import{ Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Typography, Box } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import React from 'react'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
+import React, { useState } from 'react';
+
+// import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-const Post = ({title, description, imageURL, userName, isUser, id}) => {
+const Post = ({title, description, imageURL, userName, isUser, id, initialIsFavorite}) => {
   const navigate = useNavigate();
+  const [isFavorite, setIsFavorite] = useState(initialIsFavorite); // Track the favorite state
+
   const handleEdit = (e) => {
     navigate(`/userposts/${id}`);
   }
   const deleteRequest = async () => {
-    const res = await axios.delete(`http://localhost:3000/api/post/${id}`).catch(err=>console.log(err));
+    const res = await axios.delete(`http://localhost:3000/api/post/${id}`).catch((err) => console.log(err));
     const data = await res.data;
     return data
   }
@@ -42,6 +49,7 @@ const Post = ({title, description, imageURL, userName, isUser, id}) => {
          ":hover": {
            boxShadow: "10px 10px 20px #DADEE1"
         },  
+        position: "relative",  // This is important to position the heart icon correctly
     }}>
 
     {isUser && (
