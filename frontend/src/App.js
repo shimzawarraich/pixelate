@@ -5,7 +5,6 @@ import UserPosts from "./components/UserPosts";
 import AddPosts from "./components/AddPosts";
 import PostDetails from "./components/PostDetail";
 import Login from "./components/Login"; 
-import OutfitCreator from "./components/OutfitCreator"; // Make sure to import OutfitCreator
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -26,7 +25,6 @@ function App() {
         <Route path="/posts/add" element={<AddPosts/>}/>
         <Route path="/userposts" element={<UserPosts/>}/>
         <Route path="/userposts/:id" element={<PostDetails/>}/>
-        <Route path="/outfit-creator" element={<OutfitCreator />} /> {" "}
         </>
         )}
       </Routes>
