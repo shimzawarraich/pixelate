@@ -28,18 +28,20 @@ const Posts = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/post?search=${searchVal}&filter=${filterType}`)
+      const res = await axios.get(`http://localhost:3000/api/post?search=${searchVal}&filter=${filterType}`);
       const data = await res.data;
-      setPosts(data.posts);
+      setPosts( data.posts || []); // posts is always an array, no error when no posts
       return data;
     } catch (err) {
-      console.log(err);
+      console.log("Error fetching posts:", err);
+      setPosts([]); // fallback in event of an error
     }
   };
 
   useEffect(() => {
-    fetchPosts().then((data) => setPosts(data.posts));
-  }, []);
+    // fetchPosts().then((data) => setPosts(data.posts));
+    fetchPosts();
+  }, [searchVal, filterType]);
 
   const handleSearchClick = () => {
     if (searchVal === '') {
