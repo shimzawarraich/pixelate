@@ -52,6 +52,14 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
     }
   };
 
+  // get current formatted date
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  
   return (
     <Card
       sx={{
@@ -99,7 +107,8 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           </Avatar>
         }
         title={title}
-        subheader="September 14, 2016"
+        // subheader="September 14, 2016"
+        subheader={formattedDate}
       />
       <CardMedia
         component="img"
