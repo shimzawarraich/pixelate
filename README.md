@@ -18,7 +18,7 @@ Before you start, ensure that you have the following installed on your computer:
     ```bash
     git clone https://github.com/muskanmorshed/pixelate.git
     ```
-## Backend Setup
+## Backend
 1. **Navigate to the backend directory**:
    ```bash
    cd backend
@@ -31,30 +31,7 @@ Before you start, ensure that you have the following installed on your computer:
     ```bash
     npm start
     ```
-This will start the backend server and the APi will be available for testing in Postman.
-
-## Testing the Backend with Postman
-1. **Open Postman**
-2. **To test the login functionality**: 
-- send a **POST** request to the backend API URL `http://localhost:3000/user/signup`
-- Enter login credentials in the request body.
-- Click on the **`Send`** button
-
-![Log in backend](images/login_screenshot_backend.png)
-The response will indicate whether login was successful or incorrect password.
-
-3. **To test the signup functionality**:   
-- Enter signup credentials in the request body.
-- Click on the **`Send`** button
-
-![Sign in backend](images/signup_screenshot_backend.png)
-
-4. **To get all users**:
-- Click the **`Send`** button
-- List of all the users will be shown
-
-![Users backend](images/users_screenshot_backend.png)
- This list is stored in **MongoDB**
+This will start the backend server.
 
 ## Frontend
 1. **Navigate to the backend directory**:
@@ -69,7 +46,10 @@ The response will indicate whether login was successful or incorrect password.
     ```bash
     npm start
     ```
-    This will open the frontend web application in your browser.
+This will open the frontend web application in your browser.
+
+## To Run tests
+    npm test
 
 ## Troubleshooting
 - If you encounter issues with the backend, make sure that you have the correct environment variables set up.

@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 const Schema = mongoose.Schema;
+
 const postSchema = new Schema ({
     title:{
         type: String,
@@ -19,9 +20,12 @@ const postSchema = new Schema ({
         required: true,
     },
     isFavorite: { 
-        type: Boolean, default: false // Add this field for favorite status
+        type: Boolean, default: false 
     },
-
+    likes: {
+        type: Number,
+        default: 0, // Track number of likes
+    }
 });
 
 export default mongoose.model("Post", postSchema);

@@ -11,6 +11,6 @@ postRouter.delete('/:id',deletePost )
 postRouter.get('/user/:id', getByUserId)
 
 // New route to toggle favorite status for a post
-postRouter.post('/:id/favorite', toggleFavorite);  // This will handle the favorite toggle
+postRouter.patch('/:id/favorite', toggleFavorite); // Use PATCH instead of POST
 
 export default postRouter;

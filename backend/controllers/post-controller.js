@@ -3,18 +3,19 @@ import User from "../model/User.js";
 import mongoose from "mongoose";
 
 
-export const getAllPosts = async (req, res, next)=>{
-    let posts;
+export const getAllPosts = async (req, res, next) => {
     try {
-        posts = await Post.find().populate("user");
-    } catch (err){
-        return console.log(err)
+        const posts = await Post.find().populate("user");
+        if (!posts || posts.length === 0) {
+            return res.status(404).json({ message: "No Posts Found" });
+        }
+        return res.status(200).json({ posts }); // Ensure this returns isFavorite & likes
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+        return res.status(500).json({ message: "Error fetching posts" });
     }
-    if (!posts) {
-        return res.status(404).json({message:"No Posts Found"})
-    }
-    return res.status(200).json({posts})
-}
+};
+
 
 export const addPost = async (req, res, next) => {
     const { title, description, image, user } = req.body;
@@ -66,19 +67,20 @@ export const updatePost = async(req, res, next)=>{
     return res.status(200).json({post})
     };
 
-    export const getById = async (req, res, next)=>{
+    export const getById = async (req, res, next) => {
         const id = req.params.id;
-        let post;
-        try{
-            post = await Post.findById(id);
-        }catch(err){
-            return console.log(err);
+        try {
+            const post = await Post.findById(id).populate("user"); // Ensure user data is included
+            if (!post) {
+                return res.status(404).json({ message: "No Post Found" });
+            }
+            return res.status(200).json({ post }); // Send full post object
+        } catch (err) {
+            console.error("Error fetching post:", err);
+            return res.status(500).json({ message: "Error fetching post" });
         }
-        if(!post){
-            return res.status(404).json({message: " No Post Found"})
-        }
-        return res.status(200).json({post})
     };
+    
 
     export const deletePost = async (req, res, next) => {
         const id = req.params.id;
@@ -130,28 +132,29 @@ export const updatePost = async(req, res, next)=>{
         return res.status(200).json({ user: userPosts})
     }
     
-    // Toggle favorite status for a post
-export const toggleFavorite = async (req, res, next) => {
-    const { id } = req.params;
-  
-    try {
-      // Find the post by ID
-      const post = await Post.findById(id);
-  
-      if (!post) {
-        return res.status(404).json({ message: "Post not found" });
-      }
-  
-      // Toggle the "isFavorite" status
-      post.isFavorite = !post.isFavorite;
-  
-      // Save the updated post
-      await post.save();
-  
-      // Respond with the updated favorite status
-      return res.status(200).json({ success: true, isFavorite: post.isFavorite });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ message: "Failed to toggle favorite status" });
-    }
-  };
+    export const toggleFavorite = async (req, res, next) => {
+        const { id } = req.params;
+    
+        try {
+            let post = await Post.findById(id);
+    
+            if (!post) {
+                return res.status(404).json({ message: "Post not found" });
+            }
+    
+            // Toggle isFavorite
+            post.isFavorite = !post.isFavorite;
+            post.likes = post.isFavorite ? post.likes + 1 : Math.max(0, post.likes - 1);
+    
+            // Save updated post and return the full updated document
+            post = await post.save();
+    
+            console.log("Updated isFavorite in DB:", post.isFavorite, "Total Likes:", post.likes);
+    
+            return res.status(200).json(post); // Return full updated post object
+        } catch (err) {
+            console.error("Error toggling favorite:", err);
+            return res.status(500).json({ message: "Failed to toggle favorite status" });
+        }
+    };
+    
