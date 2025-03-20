@@ -55,17 +55,20 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   return (
     <Card
       sx={{
-        width: "50%",
-        margin: 'auto',
-        mt: 2,
-        padding: 2,
+        width: "100%",
+        height: "100%",
+        margin: -1, 
+        padding: 1, 
         boxShadow: "5px 5px 10px #ccc",
         borderRadius: "20px",
-        backgroundColor: "#DADEE1",
+        backgroundColor: "#EDCFD3",
+        display: "flex",
+        flexDirection: "column", 
+        justifyContent: "space-between",
         ":hover": {
-          boxShadow: "10px 10px 20px #DADEE1"
+          //boxShadow: "10px 10px 20px #DADEE1"
+          boxShadow: '10px 10px 20px #FFB6C1',
         },
-        position: "relative"
       }}
     >
       {isUser && (
@@ -79,17 +82,19 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
         </Box>
       )}
 
+
       {/* Heart Icon Button for Favorite with Likes Count */}
-      <Box display="flex" alignItems="center" sx={{ position: 'absolute', bottom: 10, right: 10 }}>
+      
+      <Box display="flex" alignItems="center" justifyContent="flex-end"  sx={{position: 'relative'}}>
         <IconButton onClick={handleFavoriteToggle} disabled={loading}>
           {isFavorite ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon color='error' />}
         </IconButton>
-        <Typography variant="body2">{likes}</Typography>
+        <Typography variant="body2" sx={{marginLeft: "4px"}}>{likes}</Typography>
       </Box>
 
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: "#FF69B4" }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: "#C58997" }} aria-label="recipe">
             {userName.charAt(0)}
           </Avatar>
         }
@@ -98,10 +103,9 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
       />
       <CardMedia
         component="img"
-        height="200"
         image={imageURL}
         alt="post image"
-        sx={{borderRadius: "10px"}}
+        sx={{width: "100%", height: "300px", objectFit: "contain", borderRadius: "10px"}}
       />
       <CardContent>
         <Typography variant="body2" sx={{ color: 'textSecondary' }}>

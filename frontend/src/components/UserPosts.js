@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Post from "./Post"
-import { Typography, Box } from '@mui/material'
+import { Typography, Box, Grid } from '@mui/material'
 
 const UserPosts = () => {
   const [user, setUser] = useState()
@@ -16,14 +16,18 @@ const UserPosts = () => {
    },[])
    console.log(user);
   return (
-    <Box textAlign='center' p={3}> 
-      <Typography variant='h3' fontWeight='bold' color='#FF8FAB' fontFamily="'Poppins', cusrive">
+    <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ margin: 'auto', marginTop: 3, width: '100%', maxWidth: '1200px'}}> 
+      <Typography variant='h3' fontWeight='bold' color='#FF8FAB' fontFamily="'Poppins', bold" sx={{ marginBottom: 3 }}>
         Your Posts
       </Typography>
-      <Box>
+      <Box width="100%">
+      <Grid container spacing={7} justifyContent="flex-start">
       {user && user.posts && user.posts.map((post, index) => (
+        <Grid item xs={12} sm={6} md={4} key={post._id}>
       <Post id={post._id} key={index} isUser={true} title={post.title} description={post.description} imageURL={post.image} userName={user.name} />
+      </Grid>
       ))}
+      </Grid>
       </Box>
     </Box>
   )

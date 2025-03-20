@@ -71,6 +71,9 @@ The response will indicate whether login was successful or incorrect password.
     ```
     This will open the frontend web application in your browser.
 
+## To Run tests
+    npm test
+
 ## Troubleshooting
 - If you encounter issues with the backend, make sure that you have the correct environment variables set up.
 - If the frontend does not open automatically, try navigating to `http://localhost:3000` manually in your browser.
