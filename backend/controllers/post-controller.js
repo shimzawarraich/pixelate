@@ -9,7 +9,7 @@ export const getAllPosts = async (req, res, next) => {
         if (!posts || posts.length === 0) {
             return res.status(404).json({ message: "No Posts Found" });
         }
-        return res.status(200).json({ posts }); // ✅ Ensure this returns isFavorite & likes
+        return res.status(200).json({ posts }); // Ensure this returns isFavorite & likes
     } catch (err) {
         console.error("Error fetching posts:", err);
         return res.status(500).json({ message: "Error fetching posts" });
@@ -70,11 +70,11 @@ export const updatePost = async(req, res, next)=>{
     export const getById = async (req, res, next) => {
         const id = req.params.id;
         try {
-            const post = await Post.findById(id).populate("user"); // ✅ Ensure user data is included
+            const post = await Post.findById(id).populate("user"); // Ensure user data is included
             if (!post) {
                 return res.status(404).json({ message: "No Post Found" });
             }
-            return res.status(200).json({ post }); // ✅ Send full post object
+            return res.status(200).json({ post }); // Send full post object
         } catch (err) {
             console.error("Error fetching post:", err);
             return res.status(500).json({ message: "Error fetching post" });
@@ -151,7 +151,7 @@ export const updatePost = async(req, res, next)=>{
     
             console.log("Updated isFavorite in DB:", post.isFavorite, "Total Likes:", post.likes);
     
-            return res.status(200).json(post); // ✅ Return full updated post object
+            return res.status(200).json(post); // Return full updated post object
         } catch (err) {
             console.error("Error toggling favorite:", err);
             return res.status(500).json({ message: "Failed to toggle favorite status" });

@@ -28,7 +28,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
 
   const handleDelete = () => {
     deleteRequest()
-        .then(() => navigate('/posts')) // ✅ Redirect after deleting
+        .then(() => navigate('/posts')) // Redirect after deleting
         .catch((error) => console.error("Error deleting post:", error));
   };
 
@@ -37,18 +37,18 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
     setLoading(true);
     try {
         const response = await axios.patch(`http://localhost:3000/api/post/${id}/favorite`);
-        console.log("Favorite API Response:", response.data); // ✅ Debugging
+        console.log("Favorite API Response:", response.data); // Debugging
 
         if (response.data && response.data.isFavorite !== undefined) {
-            setIsFavorite(response.data.isFavorite); // ✅ Ensure state updates correctly
-            setLikes(response.data.likes); // ✅ Update likes count
+            setIsFavorite(response.data.isFavorite); // Ensure state updates correctly
+            setLikes(response.data.likes); // Update likes count
         } else {
             console.error("Invalid response from server:", response);
         }
     } catch (error) {
         console.error("Error toggling favorite:", error);
     } finally {
-        setLoading(false); // ✅ Ensures button re-enables even if an error occurs
+        setLoading(false); // Ensures button re-enables even if an error occurs
     }
   };
 
