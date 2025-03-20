@@ -13,18 +13,30 @@ const Header = () => {
     <AppBar 
         position="sticky" 
         sx={{
-            background: "#C58997",
+            background: "#ffd7dd",
             boxShadow: 'FFF0F5',
         }}
     >
         <Toolbar>
+            <Box display="flex" alignItems="center">
+                {/* Add the logo image here */}
+                <img 
+                    src="/logo512.png" // path for your logo
+                    alt="Pixelate Logo" 
+                    style={{
+                        width: 40,   // Adjust width to fit your design
+                        height: 40,  // Adjust height to fit your design
+                        marginRight: 10,  // Add some spacing between the logo and the text
+                    }} 
+                />
+                </Box>
             <Typography 
                 variant='h4'
                 sx={{
                     fontFamily: "'Poppins', cusrive",
                     fontWeight: "bold", 
-                    color: "#fff", 
-                    textShadow: "2px 2px 5px rgba(255, 255, 255, 0.8)", 
+                    color: "#7e895e", 
+                    textShadow: "2px 2px 5px rgba(179, 182, 128, 0.8)", 
                 }}
             
             >
@@ -47,7 +59,7 @@ const Header = () => {
                             sx={{
                                 fontFamily: "'Poppins', cusrive",
                                 fontSize: "1rem", 
-                                color: "#fff", 
+                                color: "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
@@ -58,7 +70,7 @@ const Header = () => {
                             sx={{
                                 fontFamily: "'Poppins', cusrive",
                                 fontSize: "1rem", 
-                                color: "#fff", 
+                                color: "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
@@ -69,10 +81,22 @@ const Header = () => {
                             sx={{
                                 fontFamily: "'Poppins', cusrive",
                                 fontSize: "1rem", 
-                                color: "#fff", 
+                                color: "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
+                        {/* New Tab for Outfit Creator */}
+                        {/* <Tab 
+                                LinkComponent={Link} 
+                                to="/outfit-creator" 
+                                label="Try-On"
+                                sx={{
+                                    fontFamily: "'Poppins', cusrive",
+                                    fontSize: "1rem", 
+                                    color: "#fff", 
+                                    "&:hover": {color: "#FF8FAB"}, 
+                                }}
+                        /> */}
                     </Tabs>
                 </Box>}
 
