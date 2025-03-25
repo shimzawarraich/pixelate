@@ -1,4 +1,4 @@
-import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Typography, Box } from '@mui/material';
+import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Typography, Box, Snackbar, Alert } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -7,11 +7,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFavorite, initialLikes }) => {
+const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFavorite, initialLikes, handlePostDelete }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [likes, setLikes] = useState(initialLikes);
   const [loading, setLoading] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleEdit = () => {
     navigate(`/userposts/${id}`);
@@ -28,100 +29,108 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
 
   const handleDelete = () => {
     deleteRequest()
-        .then(() => navigate('/posts')) // Redirect after deleting
-        .catch((error) => console.error("Error deleting post:", error));
+      .then(() => {
+        setOpenSnackbar(true); // ✅ Show success message before removing from UI
+        setTimeout(() => handlePostDelete(id), 1000); // ✅ Delay removing post for better UX
+      })
+      .catch((error) => console.error("Error deleting post:", error));
   };
 
   // Toggle favorite state
   const handleFavoriteToggle = async () => {
     setLoading(true);
     try {
-        const response = await axios.patch(`http://localhost:3000/api/post/${id}/favorite`);
-        console.log("Favorite API Response:", response.data); // Debugging
+      const response = await axios.patch(`http://localhost:3000/api/post/${id}/favorite`);
+      console.log("Favorite API Response:", response.data);
 
-        if (response.data && response.data.isFavorite !== undefined) {
-            setIsFavorite(response.data.isFavorite); // Ensure state updates correctly
-            setLikes(response.data.likes); // Update likes count
-        } else {
-            console.error("Invalid response from server:", response);
-        }
+      if (response.data && response.data.isFavorite !== undefined) {
+        setIsFavorite(response.data.isFavorite);
+        setLikes(response.data.likes);
+      } else {
+        console.error("Invalid response from server:", response);
+      }
     } catch (error) {
-        console.error("Error toggling favorite:", error);
+      console.error("Error toggling favorite:", error);
     } finally {
-        setLoading(false); // Ensures button re-enables even if an error occurs
+      setLoading(false);
     }
   };
 
-  // get current formatted date
+  // Get current formatted date
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
-  
+
   return (
-    <Card
-      sx={{
-        width: "100%",
-        height: "100%",
-        margin: -1, 
-        padding: 1, 
-        boxShadow: "5px 5px 10px #ccc",
-        borderRadius: "20px",
-        backgroundColor: "#EDCFD3",
-        display: "flex",
-        flexDirection: "column", 
-        justifyContent: "space-between",
-        ":hover": {
-          //boxShadow: "10px 10px 20px #DADEE1"
-          boxShadow: '10px 10px 20px #FFB6C1',
-        },
-      }}
-    >
-      {isUser && (
-        <Box display='flex'>
-          <IconButton onClick={handleEdit} sx={{ marginLeft: 'auto' }}>
-            <EditIcon color='secondary' />
+    <>
+      <Card
+        sx={{
+          width: "100%",
+          height: "100%",
+          margin: -1,
+          padding: 1,
+          boxShadow: "5px 5px 10px #ccc",
+          borderRadius: "20px",
+          backgroundColor: "#EDCFD3",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          ":hover": {
+            boxShadow: '10px 10px 20px #FFB6C1',
+          },
+        }}
+      >
+        {isUser && (
+          <Box display='flex'>
+            <IconButton onClick={handleEdit} sx={{ marginLeft: 'auto' }}>
+              <EditIcon color='secondary' />
+            </IconButton>
+            <IconButton onClick={handleDelete}>
+              <DeleteIcon color='error' />
+            </IconButton>
+          </Box>
+        )}
+
+        {/* Heart Icon Button for Favorite with Likes Count */}
+        <Box display="flex" alignItems="center" justifyContent="flex-end" sx={{ position: 'relative' }}>
+          <IconButton onClick={handleFavoriteToggle} disabled={loading}>
+            {isFavorite ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon color='error' />}
           </IconButton>
-          <IconButton onClick={handleDelete}>
-            <DeleteIcon color='error' />
-          </IconButton>
+          <Typography variant="body2" sx={{ marginLeft: "4px" }}>{likes}</Typography>
         </Box>
-      )}
 
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: "#C58997" }} aria-label="recipe">
+              {userName.charAt(0)}
+            </Avatar>
+          }
+          title={title}
+          subheader={formattedDate}
+        />
+        <CardMedia
+          component="img"
+          image={imageURL}
+          alt="post image"
+          sx={{ width: "100%", height: "300px", objectFit: "contain", borderRadius: "10px" }}
+        />
+        <CardContent>
+          <Typography variant="body2" sx={{ color: 'textSecondary' }}>
+            <b>{userName}{":"}</b> {description}
+          </Typography>
+        </CardContent>
+      </Card>
 
-      {/* Heart Icon Button for Favorite with Likes Count */}
-      
-      <Box display="flex" alignItems="center" justifyContent="flex-end"  sx={{position: 'relative'}}>
-        <IconButton onClick={handleFavoriteToggle} disabled={loading}>
-          {isFavorite ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon color='error' />}
-        </IconButton>
-        <Typography variant="body2" sx={{marginLeft: "4px"}}>{likes}</Typography>
-      </Box>
-
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: "#C58997" }} aria-label="recipe">
-            {userName.charAt(0)}
-          </Avatar>
-        }
-        title={title}
-        // subheader="September 14, 2016"
-        subheader={formattedDate}
-      />
-      <CardMedia
-        component="img"
-        image={imageURL}
-        alt="post image"
-        sx={{width: "100%", height: "300px", objectFit: "contain", borderRadius: "10px"}}
-      />
-      <CardContent>
-        <Typography variant="body2" sx={{ color: 'textSecondary' }}>
-          <b>{userName}{":"}</b> {description}
-        </Typography>
-      </CardContent>
-    </Card>
+      {/* ✅ Custom Snackbar (Pink Themed) */}
+      <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
+        <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ backgroundColor: "#FF8FAB", color: "white", fontWeight: "bold" }}>
+          Post successfully deleted!
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 
