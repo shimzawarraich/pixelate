@@ -96,10 +96,16 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
 
         {/* Heart Icon Button for Favorite with Likes Count */}
         <Box display="flex" alignItems="center" justifyContent="flex-end" sx={{ position: 'relative' }}>
-          <IconButton onClick={handleFavoriteToggle} disabled={loading}>
-            {isFavorite ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon color='error' />}
-          </IconButton>
-          <Typography variant="body2" sx={{ marginLeft: "4px" }}>{likes}</Typography>
+          {/* Prevent liking own post */}
+<IconButton 
+  onClick={handleFavoriteToggle} 
+  disabled={loading || isUser} // Disable if user owns the post
+  sx={{ cursor: isUser ? "not-allowed" : "pointer", opacity: isUser ? 0.5 : 1 }}
+>
+  {isFavorite ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon color='error' />}
+</IconButton>
+<Typography variant="body2" sx={{ marginLeft: "4px" }}>{likes}</Typography>
+
         </Box>
 
         <CardHeader
