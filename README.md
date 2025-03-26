@@ -65,6 +65,7 @@ This will open the frontend web application in your browser.
     ```
 - If you are having issues with the *frontend* running, try installing these dependencies:
     ```bash
+    cd frontend
     npm install react-router-dom react-redux @mui/material
     ```
 
