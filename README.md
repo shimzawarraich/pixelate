@@ -17,6 +17,7 @@ Before you start, ensure that you have the following installed on your computer:
 1. **Clone the repository** or download the project files to your local machine.
     ```bash
     git clone https://github.com/muskanmorshed/pixelate.git
+    cd pixelate
     ```
 ## Backend
 1. **Navigate to the backend directory**:
