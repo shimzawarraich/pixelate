@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Box, Button, Tabs, Tab } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginActions } from '../store';
+import React, { useState } from "react";
+import { AppBar, Toolbar, Typography, Box, Button, Tabs, Tab } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginActions } from "../store";
+import DarkModeIcon from "@mui/icons-material/NightsStay";
+import LightModeIcon from "@mui/icons-material/WbSunny";
 
-const Header = () => {
+const Header = ({ darkMode, setDarkMode }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     const [value, setValue] = useState();
 
-
     return (
-        <AppBar position="sticky" sx={{ background: "#ffd7dd", boxShadow: 'FFF0F5' }}>
+        <AppBar 
+            position="sticky" 
+            sx={{ 
+                background: darkMode ? "#333" : "#ffd7dd",
+                boxShadow: "FFF0F5",
+            }}
+        >
             <Toolbar>
                 <Box display="flex" alignItems="center">
                     <img 
@@ -22,11 +29,11 @@ const Header = () => {
                     />
                 </Box>
                 <Typography 
-                    variant='h4'
+                    variant="h4"
                     sx={{
                         fontFamily: "'Poppins', cursive",
                         fontWeight: "bold", 
-                        color: "#7e895e", 
+                        color: darkMode ? "#fff" : "#7e895e", 
                         textShadow: "2px 2px 5px rgba(179, 182, 128, 0.8)", 
                     }}
                 >
@@ -36,10 +43,10 @@ const Header = () => {
                 {isLoggedIn && (
                     <Box display="flex" marginLeft="auto" marginRight="auto">
                         <Tabs 
-                            textColor='inherit' 
+                            textColor="inherit"
                             value={value} 
                             onChange={(e, val) => setValue(val)}
-                            TabIndicatorProps={{ style: { backgroundColor: "#FF8FAB" } }}
+                            TabIndicatorProps={{ style: { backgroundColor: darkMode ? "#ffcccb" : "#FF8FAB" } }}
                         >
                             <Tab LinkComponent={Link} to="/posts" label="All Posts" sx={tabStyles} />
                             <Tab LinkComponent={Link} to="/userposts" label="My Posts" sx={tabStyles} />
@@ -80,6 +87,20 @@ const Header = () => {
                             Logout
                         </Button>
                     )}
+
+                    {/* Dark Mode Toggle Button */}
+                    <Button 
+                        onClick={() => setDarkMode(!darkMode)}
+                        sx={{
+                            marginLeft: 2,
+                            backgroundColor: darkMode ? "#444" : "#ffcccb",
+                            color: darkMode ? "#fff" : "#000",
+                            borderRadius: 20,
+                            "&:hover": { backgroundColor: darkMode ? "#555" : "#ffb6c1" },
+                        }}
+                    >
+                        {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+                    </Button>
                 </Box>
             </Toolbar>
         </AppBar>
