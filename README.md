@@ -34,19 +34,19 @@ Before you start, ensure that you have the following installed on your computer:
 This will start the backend server.
 
 ## Frontend
-1. **Install dnd kit**:
-    ```bash
-    npm install @dnd-kit/core
-    ```  
-2. **Navigate to the backend directory**:
+1. **Navigate to the frontend directory**:
     ```bash
     cd frontend
     ```
-3. **Install dependencies**:
+2. **Install dependencies**:
     ```bash
     npm install
     ```
-3. **Start the frontend server**:
+3. **Install dnd kit**:
+    ```bash
+    npm install @dnd-kit/core
+    ```  
+4. **Start the frontend server**:
     ```bash
     npm start
     ```
@@ -58,6 +58,15 @@ This will open the frontend web application in your browser.
 ## Troubleshooting
 - If you encounter issues with the backend, make sure that you have the correct environment variables set up.
 - If the frontend does not open automatically, try navigating to `http://localhost:3000` manually in your browser.
+- If you are having issues running the *backend* because nodemon is not available, navigate to the backend and install nodeman:
+    ```bash
+    cd backend
+    npm install -g nodemon
+    ```
+- If you are having issues with the *frontend* running, try installing these dependencies:
+    ```bash
+    npm install react-router-dom react-redux @mui/material
+    ```
 
 ## Future Improvements
 - Connect the frontend to the backend so that the login and signup functionality works end-to-end.
