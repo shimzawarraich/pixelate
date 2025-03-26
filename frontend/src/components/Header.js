@@ -10,6 +10,7 @@ const Header = () => {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     const [value, setValue] = useState();
 
+
     return (
         <AppBar position="sticky" sx={{ background: "#ffd7dd", boxShadow: 'FFF0F5' }}>
             <Toolbar>

@@ -36,6 +36,10 @@ const Login = () => {
             [e.target.name]: e.target.value
         }));
     };
+    const playSound = (soundFile) => {
+        const audio = new Audio(soundFile);
+        audio.play();
+    };
 
     const sendRequest = async (type = "login") => {
         try {
@@ -58,10 +62,12 @@ const Login = () => {
                     localStorage.setItem("userId", data.user._id);
                     dispatch(loginActions.login());
                     if (isSignup) {
+                        playSound("/sounds/signup.mp3");
                         setMessage("Signup successful! You can now log in.");
                         setMessageType("success");
                         setTimeout(() => navigate("/login"), 2000);
                     } else {
+                        playSound("/sounds/login.mp3");
                         setMessage("Login successful! Redirecting...");
                         setMessageType("success");
                         setTimeout(() => navigate("/posts"), 2000);
