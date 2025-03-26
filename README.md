@@ -34,11 +34,15 @@ Before you start, ensure that you have the following installed on your computer:
 This will start the backend server.
 
 ## Frontend
-1. **Navigate to the backend directory**:
+1. **Install dnd kit**:
+    ```bash
+    npm install @dnd-kit/core
+    ```  
+2. **Navigate to the backend directory**:
     ```bash
     cd frontend
     ```
-2. **Install dependencies**:
+3. **Install dependencies**:
     ```bash
     npm install
     ```
