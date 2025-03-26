@@ -86,9 +86,9 @@ const Header = () => {
                             }}
                         />
                         {/* New Tab for Outfit Creator */}
-                        {/* <Tab 
+                        <Tab 
                                 LinkComponent={Link} 
-                                to="/outfit-creator" 
+                                to="/outfit" 
                                 label="Try-On"
                                 sx={{
                                     fontFamily: "'Poppins', cusrive",
@@ -96,7 +96,7 @@ const Header = () => {
                                     color: "#fff", 
                                     "&:hover": {color: "#FF8FAB"}, 
                                 }}
-                        /> */}
+                        />
                     </Tabs>
                 </Box>}
 
