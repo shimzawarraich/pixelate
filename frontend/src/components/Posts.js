@@ -139,7 +139,8 @@ const Posts = () => {
             description={post.description} 
             imageURL={post.image} 
             userName={post.user.name}
-            initialIsFavorite={post.isFavorite}
+            // initialIsFavorite={post.isFavorite}
+            initialIsFavorite={post.likedBy.includes(localStorage.getItem("userId"))} // Fix heart per user
             initialLikes={post.likes} 
           />
           </Grid>

@@ -39,13 +39,22 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   // Toggle favorite state
   const handleFavoriteToggle = async () => {
     setLoading(true);
+    const userId = localStorage.getItem("userId"); // Get logged-in user ID
+
+    if (!userId) {
+      console.error("User not logged in");
+      return;
+    }
+
     try {
-      const response = await axios.patch(`http://localhost:3000/api/post/${id}/favorite`);
+      const response = await axios.patch(`http://localhost:3000/api/post/${id}/favorite`, { userId });
       console.log("Favorite API Response:", response.data);
 
-      if (response.data && response.data.isFavorite !== undefined) {
-        setIsFavorite(response.data.isFavorite);
+      // if (response.data && response.data.isFavorite !== undefined) {
+      if (response.data && response.data.likedBy) {
+        // setIsFavorite(response.data.isFavorite);
         setLikes(response.data.likes);
+        setIsFavorite(response.data.likedBy.includes(userId)); // Update heart icon per user
       } else {
         console.error("Invalid response from server:", response);
       }

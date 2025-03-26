@@ -159,7 +159,8 @@ export const updatePost = async(req, res, next)=>{
     
     export const toggleFavorite = async (req, res, next) => {
         const { id } = req.params;
-    
+        const { userId } = req.body; // Get user ID from request body
+
         try {
             let post = await Post.findById(id);
     
@@ -167,16 +168,33 @@ export const updatePost = async(req, res, next)=>{
                 return res.status(404).json({ message: "Post not found" });
             }
     
-            // Toggle isFavorite
-            post.isFavorite = !post.isFavorite;
-            post.likes = post.isFavorite ? post.likes + 1 : Math.max(0, post.likes - 1);
+        //     // Toggle isFavorite
+        //     post.isFavorite = !post.isFavorite;
+        //     post.likes = post.isFavorite ? post.likes + 1 : Math.max(0, post.likes - 1);
     
-            // Save updated post and return the full updated document
-            post = await post.save();
+        //     // Save updated post and return the full updated document
+        //     post = await post.save();
     
-            console.log("Updated isFavorite in DB:", post.isFavorite, "Total Likes:", post.likes);
+        //     console.log("Updated isFavorite in DB:", post.isFavorite, "Total Likes:", post.likes);
     
-            return res.status(200).json(post); // Return full updated post object
+        //     return res.status(200).json(post); // Return full updated post object
+        // } catch (err) {
+        //     console.error("Error toggling favorite:", err);
+        //     return res.status(500).json({ message: "Failed to toggle favorite status" });
+        // }
+        const userIndex = post.likedBy.indexOf(userId);
+        if (userIndex === -1) {
+            // User hasn't liked it yet, so like the post
+            post.likedBy.push(userId);
+            post.likes += 1;
+        } else {
+            // User has already liked it, so unlike the post
+            post.likedBy.splice(userIndex, 1);
+            post.likes = Math.max(0, post.likes - 1);
+        }
+
+        await post.save();
+        return res.status(200).json(post);
         } catch (err) {
             console.error("Error toggling favorite:", err);
             return res.status(500).json({ message: "Failed to toggle favorite status" });
