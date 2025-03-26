@@ -1,11 +1,13 @@
 import { TextField, Typography, Box, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios"; 
 import { useDispatch } from "react-redux"; 
 import { loginActions } from "../store"; 
 import { useNavigate } from "react-router-dom"; 
+import Welcome from './welcome'; 
 
 const Login = () => {
+    const [showWelcome, setShowWelcome] = useState(true);
     const navigate = useNavigate();
     const dispath = useDispatch();
     const [inputs, setinputs] = useState({
@@ -14,6 +16,23 @@ const Login = () => {
         password:"" 
     })
     const [isSignup, setIsSignup] = useState(false)
+
+    /*
+    useEffect(() => {
+        const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
+        if (hasVisitedBefore) {
+            setShowWelcome(false);
+        }
+    }, []);
+
+    const handleGetStarted = () => {
+        localStorage.setItem('hasVisitedBefore', 'true');
+        setShowWelcome(false);
+    };
+
+    if (showWelcome) {
+        return <Welcome onGetStarted={handleGetStarted} />;
+    }*/
 
     const handleChange = (e) => {
         setinputs((prevState)=>({

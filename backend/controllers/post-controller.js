@@ -5,7 +5,32 @@ import mongoose from "mongoose";
 
 export const getAllPosts = async (req, res, next) => {
     try {
-        const posts = await Post.find().populate("user");
+        const { search, category } = req.query; 
+        let query = {}; 
+
+        if (search) {
+            query.$or = [
+                { title: { $regex: search, $options: 'i' }}, 
+                { description: { $regex: search, $options: 'i'}}
+            ];
+        }
+
+        if (category && category !== 'All'){
+            const categoryQuuery = {
+                $or: [
+                    {title: { $regex: category, $options: 'i'}}, 
+                    {description: { $regex: category, $options: 'i'}}
+                ]
+            }
+            if (Object.keys(query).length > 0) {
+                query = {
+                    $and: [query, categoryQuuery]
+                }
+            } else {
+                query = categoryQuuery
+            }
+        }
+        const posts = await Post.find(query).populate("user");
         if (!posts || posts.length === 0) {
             return res.status(404).json({ message: "No Posts Found" });
         }

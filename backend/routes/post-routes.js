@@ -13,4 +13,6 @@ postRouter.get('/user/:id', getByUserId)
 // New route to toggle favorite status for a post
 postRouter.patch('/:id/favorite', toggleFavorite); // Use PATCH instead of POST
 
+
+
 export default postRouter;
