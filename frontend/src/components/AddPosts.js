@@ -12,8 +12,8 @@ const AddBlog = () => {
         imageURL: "" 
     });
 
-    const [message, setMessage] = useState(""); // ✅ State for success/error message
-    const navigate = useNavigate(); // ✅ React Router hook for navigation
+    const [message, setMessage] = useState(""); // State for success/error message
+    const navigate = useNavigate(); // React Router hook for navigation
 
     const handleChange = (e) => {
         setInputs((prevState) => ({
@@ -44,12 +44,12 @@ const AddBlog = () => {
 
         sendRequest().then((data) => {
             if (data) {
-                setMessage("Post submitted successfully! Redirecting ...."); // ✅ Show success message
+                setMessage("Post submitted successfully! Redirecting ...."); // Show success message
 
-                // ✅ Redirect after 2 seconds
+                // Redirect after 2 seconds
                 setTimeout(() => navigate("/userposts"), 2000);
             } else {
-                setMessage("Failed to submit post. Please try again."); // ✅ Show error message
+                setMessage("Failed to submit post. Please try again."); // Show error message
             }
         });
     };
@@ -128,7 +128,7 @@ const AddBlog = () => {
                         Post
                     </Button>
 
-                    {/* ✅ Success/Error Message Display */}
+                    {/* Success/Error Message Display */}
                     {message && (
                         <Typography 
                             sx={{ marginTop: 2, color: message.includes("successfully") ? "green" : "red", fontWeight: "bold" }}

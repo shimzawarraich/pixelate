@@ -30,8 +30,8 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   const handleDelete = () => {
     deleteRequest()
       .then(() => {
-        setOpenSnackbar(true); // ✅ Show success message before removing from UI
-        setTimeout(() => handlePostDelete(id), 1000); // ✅ Delay removing post for better UX
+        setOpenSnackbar(true); // Show success message before removing from UI
+        setTimeout(() => handlePostDelete(id), 1000); // Delay removing post for better UX
       })
       .catch((error) => console.error("Error deleting post:", error));
   };
@@ -139,7 +139,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
         </CardContent>
       </Card>
 
-      {/* ✅ Custom Snackbar (Pink Themed) */}
+      {/* Custom Snackbar (Pink Themed) */}
       <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
         <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ backgroundColor: "#FF8FAB", color: "white", fontWeight: "bold" }}>
           Post successfully deleted!
