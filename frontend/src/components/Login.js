@@ -55,6 +55,23 @@ const Login = () => {
             console.error(err);
         }
     };
+    const animateError = () => {
+        const passwordField = document.querySelector("input[name='password']");
+        if (!passwordField) return;
+        
+        passwordField.style.transition = "transform 0.1s ease-in-out";
+        
+        let count = 0;
+        const interval = setInterval(() => {
+            passwordField.style.transform = `translateX(${count % 2 === 0 ? "5px" : "-5px"})`;
+            count++;
+            if (count > 5) {
+                clearInterval(interval);
+                passwordField.style.transform = "translateX(0)";
+            }
+        }, 100);
+    };
+    
 
     const handleLogin = async () => {
         const response = await fetch("http://localhost:5000/api/login", {
@@ -71,7 +88,7 @@ const Login = () => {
         }
       };
 
-    const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
         sendRequest(isSignup ? "signup" : "login")
             .then((data) => {
@@ -80,18 +97,24 @@ const Login = () => {
                     dispatch(loginActions.login());
                     if (isSignup) {
                         playSound("/sounds/signup.mp3");
-                        setMessage("Signup successful! You can now log in.");
+                        setMessage("🎉 Signup successful! You can now log in. 💖");
                         setMessageType("success");
                         setTimeout(() => navigate("/login"), 2000);
                     } else {
                         playSound("/sounds/login.mp3");
-                        setMessage("Login successful! Redirecting...");
+                        setMessage("✅ Login successful! Redirecting... ✨");
                         setMessageType("success");
                         setTimeout(() => navigate("/posts"), 2000);
                     }
+                } else {
+                    // Wrong password effect
+                    setMessage("❌ Oops! Wrong password! 🥺💔 Try again, bestie! ✨");
+                    setMessageType("error");
+                    animateError(); 
                 }
             });
     };
+    
 
     return (
         <div>
