@@ -7,6 +7,8 @@ import PostDetails from "./components/PostDetail";
 import Login from "./components/Login"; 
 // import TryOn from "./components/TryOn"; 
 import Outfit from "./components/Outfit"; 
+// import OutfitMaker from "./components/OutfitMaker";
+import Closet from "./components/Closet";
 
 
 //import OutfitCreator from "./components/OutfitCreator"; // Make sure to import OutfitCreator
@@ -33,6 +35,8 @@ function App() {
         <Route path="/userposts/:id" element={<PostDetails/>}/>
         {/* <Route path="/tryOn" element={<TryOn/>}/> */}
         <Route path="/outfit" element={<Outfit/>}/>
+        {/* <Route path="/closet" element={<OutfitMaker/>}/> */}
+        <Route path="/closet" element={<Closet/>}/>
         </>
         )}
       </Routes>

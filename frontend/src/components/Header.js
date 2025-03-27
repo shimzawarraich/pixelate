@@ -93,7 +93,19 @@ const Header = () => {
                                 sx={{
                                     fontFamily: "'Poppins', cusrive",
                                     fontSize: "1rem", 
-                                    color: "#fff", 
+                                    color: "#7e895e", 
+                                    "&:hover": {color: "#FF8FAB"}, 
+                                }}
+                        />
+                        {/* New Tab for OutfitMaker */}
+                        <Tab 
+                                LinkComponent={Link} 
+                                to="/closet" 
+                                label="Closet"
+                                sx={{
+                                    fontFamily: "'Poppins', cusrive",
+                                    fontSize: "1rem", 
+                                    color: "#7e895e", 
                                     "&:hover": {color: "#FF8FAB"}, 
                                 }}
                         />

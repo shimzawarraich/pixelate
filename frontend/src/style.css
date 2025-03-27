@@ -1,0 +1,373 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body {
+    background-color: #f0f0f0; 
+    background-image: url("../public/background.png"); 
+    background-repeat: repeat; 
+    background-size: cover; 
+}
+
+#container{
+    position: absolute;
+    /* margin:auto; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 574px;
+    height :666px;
+   background-color: rgb(126, 137, 94);
+}
+
+#background{
+    position:absolute;
+    width:374px;
+    height:666px;
+    left:100px; 
+    right: 100px;
+    background-color: rgb(231, 168, 216);
+    background-image: url("../public/closet/resized_background.png"); 
+    /* change to background */
+    
+}
+
+/* #hairback{
+     position:absolute;
+    width:374px;
+    height:666px;    
+}
+
+.hairback{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url("../public/closet/furr-coat-pink.png"); */
+    
+/* } */
+#man{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url("../public/closet/body.png");
+}
+
+#bottoms{
+     position:absolute;
+    width:374px;
+    height:666px;
+    
+}
+
+.default{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/default.png);
+}
+.bottom1{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/black-pleated-skirt.png);
+    
+}
+
+.bottom2{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/dark-jeans.png);
+    
+}
+
+.bottom3{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/basic-white-skirt.png);
+}
+.bottom4{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/blue-jeans.png);
+}
+.bottom5{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/satin-pink-skirt.png);
+}
+.bottom6{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/cherry-skirt.png);
+}
+.bottom7{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/purple-lacey-skirt.png);
+}
+.bottom8{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/red-lacey-skirt.png);
+}
+.bottom9{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/orange-skirt.png);
+}
+.bottom10{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/hot-pink-skirt.png);
+}.bottom11{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/pink-star-pants.PNG);
+}.bottom12{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/pink-pants.PNG);
+}.bottom13{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/sharara-pants.PNG);
+}.bottom14{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/indow-pants.PNG);
+}
+
+
+#clothes{
+    position:absolute;
+    width:374px;
+    height:666px;
+    
+}
+.default{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/default.png);
+}
+.top1{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/red-dress.png);
+}
+.top2{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/pink-stripes-sweatertop.png);
+}
+.top3{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/green-sweater.png);
+}
+.top4{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/pink-check-top.png);
+}
+.top5{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/dark-abaya.png);
+}
+.top6{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/maroon-abaya.png);
+}.top7{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/white-top1.png);
+}.top8{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/white-sweater.PNG);
+}.top9{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/stripes-sweater.PNG);
+}.top10{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/blue-dress.PNG);
+}.top11{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/corset-shirt.PNG);
+}.top12{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/blue-shirt.PNG);
+}.top13{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/white-kurti.PNG);
+}.top14{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/white-dress.PNG);
+}.top15{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/purple-kurti.PNG);
+}.top16{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/pink-kurti.PNG);
+}.top17{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/pink-dress.PNG);
+}.top18{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/white-top2.PNG);
+}
+
+#jackets
+.default{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/default.png);
+}
+.jacket1{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/pastel-yellow-cardigan.png);
+}
+.jacket2{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/furr-coat-pink.png);
+}
+.jacket3{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/white-cardigan-bow.png);
+}
+
+#head{
+     position:absolute;
+    width:374px;
+    height:666px;
+}
+.default{
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/default.png);
+}
+.head1{
+    
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/pink-headphones.png);
+}
+
+.head2{
+    
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/purple-hijab.png);
+}
+
+.head3{
+    
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/blue-hijab.png);
+}
+
+.head4{
+
+    position:absolute;
+    width:374px;
+    height:666px;
+    background-image: url(../public/closet/hair.png);
+}
+
+#nexthead{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:5px;
+    top:50px;
+    border: none;
+    outline: 2px solid #fff; 
+}
+#nexthead:hover {
+    color: #FF8FAB; 
+}
+
+#nextjacket{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:5px;
+    top:200px;
+}
+/* Change text color on hover */
+#nextjacket:hover {
+    color: #FF8FAB; 
+}
+
+
+#nexttop{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:5px;
+    top:250px;
+    border: none;
+    outline: 2px solid #FF8FAB; 
+}
+#nexttop:hover {
+    color: #FF8FAB; 
+}
+
+#nextbottom{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:5px;
+    top:450px;
+    border: none;
+    outline: 2px solid #7e895e; 
+}
+#nextbottom:hover {
+    color: #FF8FAB; 
+}
+
+#prevhead{
+    position:absolute;
+    left:150px;
+    top:50px;
+}
+
+#prevjacket{
+    position:absolute;
+    left:50px;
+    top:400px;
+}
+
+#prevtop{
+    position:absolute;
+    left:50px;
+    top:400px;
+}
+
+#prevbottom{
+    position:absolute;
+    left:50px;
+    top:750px;
+}
