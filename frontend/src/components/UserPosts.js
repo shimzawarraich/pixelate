@@ -31,7 +31,14 @@ const UserPosts = () => {
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ margin: 'auto', marginTop: 3, width: '100%', maxWidth: '1200px' }}> 
-      <Typography variant='h3' fontWeight='bold' color='#FF8FAB' fontFamily="'Poppins', bold" sx={{ marginBottom: 3 }}>
+      <Typography variant='h3' 
+      sx = {{
+        fontWeight:'bold', color:'#FF8FAB', fontFamily:"'Poppins', bold", marginBottom: 3,
+        backgroundColor: "rgba(255, 215, 221, 0.85)", // Translucent #FFD7DD
+        padding: "5px 10px", // Adds spacing around the text
+        borderRadius: "5px", // Softens edges
+      }}
+      >
         Your Posts
       </Typography>
       
