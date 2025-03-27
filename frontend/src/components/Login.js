@@ -2,7 +2,7 @@ import { TextField, Typography, Box, Button, Alert } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import axios from "axios"; 
 import { useDispatch } from "react-redux"; 
-import { loginActions } from "../store"; 
+import { loginActions } from "../store/index"; 
 import { useNavigate, useLocation } from "react-router-dom"; 
 
 const Login = () => {
@@ -18,6 +18,8 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("success");
 
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     useEffect(() => {
         setIsSignup(queryParams.has("signup") ? queryParams.get("signup") === "true" : false);
     }, [location.search]);
@@ -53,6 +55,21 @@ const Login = () => {
             console.error(err);
         }
     };
+
+    const handleLogin = async () => {
+        const response = await fetch("http://localhost:5000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }), 
+        });
+    
+        const data = await response.json();
+    
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          dispatch(loginActions.login()); 
+        }
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
