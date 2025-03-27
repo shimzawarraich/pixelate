@@ -51,6 +51,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             <Tab LinkComponent={Link} to="/posts" label="All Posts" sx={tabStyles} />
                             <Tab LinkComponent={Link} to="/userposts" label="My Posts" sx={tabStyles} />
                             <Tab LinkComponent={Link} to="/posts/add" label="Add Posts" sx={tabStyles} />
+                            <Tab LinkComponent={Link} to="/liked" label="My Liked Posts" sx={tabStyles} />
                             <Tab LinkComponent={Link} to="/outfit" label="Try-On" sx={{ ...tabStyles, color: "#fff" }} />
                         </Tabs>
                     </Box>

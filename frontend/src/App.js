@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import {Route, Routes, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Posts from "./components/Posts";
 import UserPosts from "./components/UserPosts";
@@ -6,6 +6,7 @@ import AddPosts from "./components/AddPosts";
 import PostDetails from "./components/PostDetail";
 import Login from "./components/Login";
 import Outfit from "./components/Outfit";
+import LikedPosts from "./components/LikedPosts"; // Import the component
 
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/userposts" element={<UserPosts />} />
                 <Route path="/userposts/:id" element={<PostDetails />} />
                 <Route path="/outfit" element={<Outfit />} />
+                <Route path="/liked" element={<LikedPosts />} />
               </>
             )}
           </Routes>

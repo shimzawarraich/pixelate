@@ -2,7 +2,6 @@ import Post from "../model/Post.js";
 import User from "../model/User.js";
 import mongoose from "mongoose";
 
-
 export const getAllPosts = async (req, res, next) => {
     try {
         const { search, category } = req.query; 
@@ -168,20 +167,6 @@ export const updatePost = async(req, res, next)=>{
                 return res.status(404).json({ message: "Post not found" });
             }
     
-        //     // Toggle isFavorite
-        //     post.isFavorite = !post.isFavorite;
-        //     post.likes = post.isFavorite ? post.likes + 1 : Math.max(0, post.likes - 1);
-    
-        //     // Save updated post and return the full updated document
-        //     post = await post.save();
-    
-        //     console.log("Updated isFavorite in DB:", post.isFavorite, "Total Likes:", post.likes);
-    
-        //     return res.status(200).json(post); // Return full updated post object
-        // } catch (err) {
-        //     console.error("Error toggling favorite:", err);
-        //     return res.status(500).json({ message: "Failed to toggle favorite status" });
-        // }
         const userIndex = post.likedBy.indexOf(userId);
         if (userIndex === -1) {
             // User hasn't liked it yet, so like the post
@@ -198,6 +183,18 @@ export const updatePost = async(req, res, next)=>{
         } catch (err) {
             console.error("Error toggling favorite:", err);
             return res.status(500).json({ message: "Failed to toggle favorite status" });
+        }
+    };
+
+    export const getLikedPosts = async (req, res) => {
+        const { userId } = req.params;
+    
+        try {
+            const likedPosts = await Post.find({ likedBy: userId }).populate("user", "name");
+            res.status(200).json({ posts: likedPosts });
+        } catch (error) {
+            console.error("Error fetching liked posts:", error);
+            res.status(500).json({ message: "Failed to get liked posts" });
         }
     };
     
