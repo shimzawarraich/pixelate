@@ -23,16 +23,24 @@ const LikedPosts = () => {
   }, [userId]);
 
   return (
-    <Box sx={{ padding: 4 }}>
+    <Box sx={{ padding: 4, textAlign: "center"}}>
       {/* Title */}
       <Typography 
         variant="h3" 
         sx={{
-          textAlign: "center", 
+          display: "inline-block", // Ensures background only wraps around text 
           mb: 3, 
           color: "#FF8FAB", 
+          // color: "#EDCFD3",
           fontWeight: "bold",
-          fontFamily: "'Poppins'"
+          fontFamily: "'Poppins'",
+          padding: "5px 10px", // Adds spacing around the text
+          borderRadius: "5px", // Softens edges
+          // textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", // Adds a slight black shadow
+          // backgroundColor: "rgba(237, 207, 211, 0.6)", // Translucent version of #EDCFD3
+          // backgroundColor: "rgba(178, 168, 144, 0.85)", // Brighter translucent shade
+          // backgroundColor: "rgba(126, 137, 94, 0.85)", // Brighter translucent #7E895E
+          backgroundColor: "rgba(255, 215, 221, 0.85)", // Translucent #FFD7DD
         }}
       >
         My Liked Posts
