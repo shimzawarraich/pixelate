@@ -1,3 +1,4 @@
+/* based from https://github.com/adreejish/Dress-up-game */
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -57,7 +58,7 @@ body {
 #container{
     position: absolute;
     /* margin:auto; */
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 574px;
@@ -185,7 +186,7 @@ body {
     position:absolute;
     width:374px;
     height:666px;
-    background-image: url(../public/closet/pink-stripes-sweatertop.png);
+    background-image: url(../public/closet/pink-stripes-sweatertop.PNG);
 }
 .top3{
     position:absolute;
@@ -225,6 +226,10 @@ body {
     background-image: url(../public/closet/pink-dress.PNG);
 }.top18{ position:absolute;width:374px;height:666px;
     background-image: url(../public/closet/white-top2.PNG);
+}.top19{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/brown-sweatshirt.PNG);
+}.top20{ position:absolute;width:374px;height:666px;
+    background-image: url(../public/closet/pink-gown.png);
 }
 
 #jackets
@@ -251,6 +256,12 @@ body {
     width:374px;
     height:666px;
     background-image: url(../public/closet/white-cardigan-bow.png);
+} .jacket4{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/pink-keffiyeh1.PNG);
+} .jacket5{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/strawberry-sweater.PNG);
+}.jacket6{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/pink-keffiyeh2.PNG);
 }
 
 #head{
@@ -294,6 +305,76 @@ body {
     width:374px;
     height:666px;
     background-image: url(../public/closet/hair.png);
+}
+.head5{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/olive-keffiyeh.PNG);
+}
+.head6{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/watermelon-bucket-hat.PNG);
+}
+.head7{ position:absolute; width:374px; height:666px;
+    background-image: url(../public/closet/pink-hijab.png);
+}
+
+#resetall{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:480px;
+    top:15px;
+    border: none;
+    outline: 2px solid #fff; 
+}
+#resetall:hover {
+    color: #FF8FAB; 
+}
+#resetj{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:480px;
+    top:200px;
+    border: none;
+    outline: 2px solid #fff; 
+}
+#resetj:hover {
+    color: #FF8FAB; 
+}
+#resett{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:480px;
+    top:250px;
+    border: none;
+    outline: 2px solid #fff; 
+}
+#resett:hover {
+    color: #FF8FAB; 
+}
+#resetb{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:480px;
+    top:450px;
+    border: none;
+    outline: 2px solid #fff; 
+}
+#resetb:hover {
+    color: #FF8FAB; 
+}
+#reseth{
+    background-color: #ffd7dd;
+    color: #7e895e; 
+    position:absolute;
+    right:480px;
+    top:50px;
+    border: none;
+    outline: 2px solid #fff; 
+}
+#reseth:hover {
+    color: #FF8FAB; 
 }
 
 #nexthead{
