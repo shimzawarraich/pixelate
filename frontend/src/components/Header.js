@@ -81,6 +81,11 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
+                        <Tab 
+                            LinkComponent={Link} 
+                            to="/liked" 
+                            label="My Liked Posts" 
+                            sx={tabStyles} />
                         {/* New Tab for Outfit Creator */}
                         <Tab 
                                 LinkComponent={Link} 
