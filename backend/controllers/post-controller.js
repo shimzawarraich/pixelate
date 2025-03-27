@@ -2,10 +2,34 @@ import Post from "../model/Post.js";
 import User from "../model/User.js";
 import mongoose from "mongoose";
 
-
 export const getAllPosts = async (req, res, next) => {
     try {
-        const posts = await Post.find().populate("user");
+        const { search, category } = req.query; 
+        let query = {}; 
+
+        if (search) {
+            query.$or = [
+                { title: { $regex: search, $options: 'i' }}, 
+                { description: { $regex: search, $options: 'i'}}
+            ];
+        }
+
+        if (category && category !== 'All'){
+            const categoryQuuery = {
+                $or: [
+                    {title: { $regex: category, $options: 'i'}}, 
+                    {description: { $regex: category, $options: 'i'}}
+                ]
+            }
+            if (Object.keys(query).length > 0) {
+                query = {
+                    $and: [query, categoryQuuery]
+                }
+            } else {
+                query = categoryQuuery
+            }
+        }
+        const posts = await Post.find(query).populate("user");
         if (!posts || posts.length === 0) {
             return res.status(404).json({ message: "No Posts Found" });
         }
@@ -134,7 +158,8 @@ export const updatePost = async(req, res, next)=>{
     
     export const toggleFavorite = async (req, res, next) => {
         const { id } = req.params;
-    
+        const { userId } = req.body; // Get user ID from request body
+
         try {
             let post = await Post.findById(id);
     
@@ -142,19 +167,34 @@ export const updatePost = async(req, res, next)=>{
                 return res.status(404).json({ message: "Post not found" });
             }
     
-            // Toggle isFavorite
-            post.isFavorite = !post.isFavorite;
-            post.likes = post.isFavorite ? post.likes + 1 : Math.max(0, post.likes - 1);
-    
-            // Save updated post and return the full updated document
-            post = await post.save();
-    
-            console.log("Updated isFavorite in DB:", post.isFavorite, "Total Likes:", post.likes);
-    
-            return res.status(200).json(post); // Return full updated post object
+        const userIndex = post.likedBy.indexOf(userId);
+        if (userIndex === -1) {
+            // User hasn't liked it yet, so like the post
+            post.likedBy.push(userId);
+            post.likes += 1;
+        } else {
+            // User has already liked it, so unlike the post
+            post.likedBy.splice(userIndex, 1);
+            post.likes = Math.max(0, post.likes - 1);
+        }
+
+        await post.save();
+        return res.status(200).json(post);
         } catch (err) {
             console.error("Error toggling favorite:", err);
             return res.status(500).json({ message: "Failed to toggle favorite status" });
+        }
+    };
+
+    export const getLikedPosts = async (req, res) => {
+        const { userId } = req.params;
+    
+        try {
+            const likedPosts = await Post.find({ likedBy: userId }).populate("user", "name");
+            res.status(200).json({ posts: likedPosts });
+        } catch (error) {
+            console.error("Error fetching liked posts:", error);
+            res.status(500).json({ message: "Failed to get liked posts" });
         }
     };
     

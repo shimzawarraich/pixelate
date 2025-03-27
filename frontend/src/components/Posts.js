@@ -2,36 +2,29 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from "./Post";
 import { BsSearch } from 'react-icons/bs';
-import { TextField, Select, MenuItem, Box, Typography, Grid, InputLabel, FormControl, IconButton } from '@mui/material';
+import { TextField, Select, MenuItem, Box, Typography, Grid, InputLabel, FormControl, IconButton, Button } from '@mui/material';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  const [productListItems, setProductListItems] = useState( [ "T-shirt", "Tank top", "Blouse", "Button-up shirt", "Polo shirt", "Hoodie", "Sweater", "Cardigan", "Crop top", "Tunic", 
-      "Jeans", "Trousers", "Sweatpants", "Joggers", "Leggings", "Skirt", "Shorts", "Cargo pants",
-      "Maxi dress", "Mini dress", "Bodycon dress", "Jumpsuit", "Overalls", "Denim Jacket", "Leather jacket", 
-      "Blazer", "Trench coat", "Puffer jacket", "Varsity jacket", "Coats", "Winter jacket", 
-      "Sneakers", "Boots", "Heels", "Flats", "Sandals", "Slippers", "Beanie", "Baseball cap", "Bucket hat", 
-      "Scarf", "Hijab", "Gloves", "Belt", "Sock", "Necklace", "Ring", "Braclet", "Backpack", "Handbag", "Purse", 
-      "Tote bag", "Glasses", "Sunglasses"   
-  ])
-  const [productListColors, setProductListColors] = useState([ "White", "Black", "Grey", "Beige", "Brown", "Cream", "Red", "Blue", "Yellow", "Green", 
-      "Orange", "Purple", "Baby Blue", "Lavender", "Blush Pink", "Burgundy", "Sage green", "Peach",
-      "Light brown", "Light red", "Baby pink", "Army green", "Olive green", "Rust", "Mustard", 
-      "Turquoise", "Gold", "Silver", "Bronze", "Rose Gold", "Neon pink", 
-      "Orange"  
-  ])
+  const [productCategories, setProductCategories] = useState( [ "Top", "Pant", "Skirt", "Hijab", "Hat", "Dress"])
   const [searchVal, setSearchVal] = useState("");
-  const [filteredItems, setFilteredItems] = useState(productListItems); 
-  const [filteredColors, setFilteredColors] = useState(productListColors);
-  const [filterType, setFilterType] = useState("items");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [showFilters, setShowFilters] = useState(false); 
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/post?search=${searchVal}&filter=${filterType}`);
+      const params = new URLSearchParams; 
+
+      if (searchVal) {
+        params.append('search', searchVal); 
+      }
+      if (selectedCategory !== "All") {
+        params.append('category', selectedCategory);
+      }
+
+      const res = await axios.get(`http://localhost:3000/api/post?${params.toString()}`); 
       const data = await res.data;
       setPosts( data.posts || []); // posts is always an array, no error when no posts
-      return data;
     } catch (err) {
       console.log("Error fetching posts:", err);
       setPosts([]); // fallback in event of an error
@@ -40,50 +33,50 @@ const Posts = () => {
 
   useEffect(() => {
     // fetchPosts().then((data) => setPosts(data.posts));
+    const timer = setTimeout(() => {
     fetchPosts();
-  }, [searchVal, filterType]);
+  }, 500);
+    return () => clearTimeout(timer); 
+  }, [searchVal, selectedCategory]);
 
   const handleSearchClick = () => {
-    if (searchVal === '') {
-      setFilteredItems(productListItems);
-      setFilteredColors(productListColors);
-      return;
-    }  
+    fetchPosts(); 
+  }
+  
+  const handleSearchChange = (e) => {
+    setSearchVal(e.target.value);
+  };
 
-    if (filterType === "items") {
-    const filterBySearch = productListItems.filter((item) =>
-      item.toLowerCase().includes(searchVal.toLowerCase())
-    );
-    setFilteredItems(filterBySearch);
-  } else if (filterType === "colors") {
-    const filterBySearchColour = productListColors.filter((item) =>
-      item.toLowerCase().includes(searchVal.toLowerCase())
-    );
-    setFilteredColors(filterBySearchColour);
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearchClick(); 
     }
   }
 
-  const handleFilterTypeChange = (event) => {
-    setFilterType(event.target.value);
-    setSearchVal('');
+  const handleResetFilters = () => {
+    setSearchVal("");
+    setSelectedCategory("All");
   }
 
-
-
-  console.log("Fetched posts:", posts);
+  //console.log("Fetched posts:", posts);
 
   return (
     <Box sx={{ padding: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, marginBottom: 4}}>
         <FormControl sx={{ minWidth: 120 }}>
-          <InputLabel>Filter By</InputLabel>
+          <InputLabel>Category</InputLabel>
           <Select
-            value={filterType}
-            onChange={handleFilterTypeChange}
-            label="Filter By"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            label="Category"
           >
-            <MenuItem value="items">Items</MenuItem>
-            <MenuItem value="colors">Colors</MenuItem>
+            {productCategories.map((category) => (
+              <MenuItem key={category} value={category}>{category}</MenuItem>
+            ))}
           </Select>
           </FormControl>
     
@@ -92,35 +85,51 @@ const Posts = () => {
             variant="outlined"
             value={searchVal}
             onChange={(e) => setSearchVal(e.target.value)}
+            onKeyPress={handleKeyPress}
             sx={{ width: '300px' }}
           />
           <IconButton onClick={handleSearchClick}>
           <BsSearch/>
           </IconButton>
-    
-    <IconButton onClick={() => setShowFilters(!showFilters)}>
-            <Typography variant="body1">{showFilters ? 'Hide Filters' : 'Show Filters'}</Typography>
-          </IconButton>
+
+          <Button 
+            variant="outlined" 
+            onClick={handleResetFilters}
+            sx={{
+              minWidth: '120px',
+              backgroundColor: '#ff9eb5', 
+              color: '#ffffff', 
+              '&:hover': {
+                backgroundColor: '#ff9eb5', 
+                transform: 'scale(1.02)', 
+              },
+              textTransform: 'none',
+              fontSize: '1rem',
+              fontWeight: 600,
+              borderRadius: '12px', 
+              boxShadow: '0 4px 8px rgba(255, 158, 181, 0.3)',
+              height: '56px',
+              px: 3,
+              whiteSpace: 'nowrap',
+              transition: 'all 0.3s ease',
+              border: '2px solid rgba(255, 158, 181, 0.3)', 
+              fontFamily: '"Poppins"', 
+            }}
+          >
+            Show All
+          </Button>
         </Box>
     
         {showFilters && (
           <Box sx={{ marginBottom: 4 }}>
-          <Typography variant="h5" gutterBottom>
-            Filtered {filterType === "items" ? "Items" : "Colors"}
-          </Typography>
           <Box sx={{ maxHeight: '400px', overflowY: 'auto', border: '1px solid #ccc', borderRadius: 2, padding: 2}}>
-            {(filterType === "items" ? filteredItems : filteredColors).map((item, index) => (
-          <Typography key={index} sx={{ padding: 1, borderBottom: '1px solid #eee'}}>
-              {item}
-          </Typography>
-        ))}
         </Box>
         </Box>
       )}
       <Box>
       <Grid container spacing={7} justifyContent="center">
-      {posts &&
-        posts.map((post) => (
+      {posts.length > 0 ? (
+         posts.map((post) => (
           <Grid item xs={12} sm={6} md={4} key={post._id}>
           <Post 
             key={post._id}
@@ -130,11 +139,33 @@ const Posts = () => {
             description={post.description} 
             imageURL={post.image} 
             userName={post.user.name}
-            initialIsFavorite={post.isFavorite}
+            // initialIsFavorite={post.isFavorite}
+            initialIsFavorite={post.likedBy.includes(localStorage.getItem("userId"))} // Fix heart per user
             initialLikes={post.likes} 
           />
           </Grid>
-        ))}
+        ))
+      ) : (
+          <Typography 
+          variant="h5" 
+          sx={{
+            color: "#FF8FAB",
+            fontWeight: "bold", 
+            fontSize: "24px", 
+            textAlign: "center", 
+            fontFamily: "'Dancing Script', cursive", 
+            backgroundColor: "#FFE4E1", 
+            padding: "15px", 
+            borderRadius: "12px", 
+            boxShadow: "5px 5px 15px rgba(255, 182, 193, 0.5)", 
+            maxWidth: "60%", 
+            margin: "50px auto", 
+            transition: "all 0.3s ease-in-out",
+          }}
+        >
+          No posts found match your criteria
+        </Typography>
+      )}
         </Grid>
         </Box>
       </Box>

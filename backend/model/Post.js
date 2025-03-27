@@ -19,13 +19,15 @@ const postSchema = new Schema ({
         ref: "User",
         required: true,
     },
-    isFavorite: { 
-        type: Boolean, default: false 
-    },
+    // isFavorite: { 
+    //     type: Boolean, default: false 
+    // },
     likes: {
         type: Number,
         default: 0, // Track number of likes
-    }
+    },
+    likedBy: [{ type: mongoose.Types.ObjectId, ref: "User"}] // Track users who liked the post
+
 });
 
 export default mongoose.model("Post", postSchema);

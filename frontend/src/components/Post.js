@@ -30,8 +30,8 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   const handleDelete = () => {
     deleteRequest()
       .then(() => {
-        setOpenSnackbar(true); // ✅ Show success message before removing from UI
-        setTimeout(() => handlePostDelete(id), 1000); // ✅ Delay removing post for better UX
+        setOpenSnackbar(true); // Show success message before removing from UI
+        setTimeout(() => handlePostDelete(id), 1000); // Delay removing post for better UX
       })
       .catch((error) => console.error("Error deleting post:", error));
   };
@@ -39,13 +39,22 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   // Toggle favorite state
   const handleFavoriteToggle = async () => {
     setLoading(true);
+    const userId = localStorage.getItem("userId"); // Get logged-in user ID
+
+    if (!userId) {
+      console.error("User not logged in");
+      return;
+    }
+
     try {
-      const response = await axios.patch(`http://localhost:3000/api/post/${id}/favorite`);
+      const response = await axios.patch(`http://localhost:3000/api/post/${id}/favorite`, { userId });
       console.log("Favorite API Response:", response.data);
 
-      if (response.data && response.data.isFavorite !== undefined) {
-        setIsFavorite(response.data.isFavorite);
+      // if (response.data && response.data.isFavorite !== undefined) {
+      if (response.data && response.data.likedBy) {
+        // setIsFavorite(response.data.isFavorite);
         setLikes(response.data.likes);
+        setIsFavorite(response.data.likedBy.includes(userId)); // Update heart icon per user
       } else {
         console.error("Invalid response from server:", response);
       }
@@ -130,7 +139,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
         </CardContent>
       </Card>
 
-      {/* ✅ Custom Snackbar (Pink Themed) */}
+      {/* Custom Snackbar (Pink Themed) */}
       <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
         <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ backgroundColor: "#FF8FAB", color: "white", fontWeight: "bold" }}>
           Post successfully deleted!

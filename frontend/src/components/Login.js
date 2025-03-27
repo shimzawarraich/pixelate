@@ -1,54 +1,80 @@
-import { TextField, Typography, Box, Button } from '@mui/material';
-import React, { useState } from 'react';
+import { TextField, Typography, Box, Button, Alert } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import axios from "axios"; 
 import { useDispatch } from "react-redux"; 
 import { loginActions } from "../store"; 
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 const Login = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    
+    const initialSignupState = queryParams.has("signup") ? queryParams.get("signup") === "true" : false;
+    
     const navigate = useNavigate();
-    const dispath = useDispatch();
-    const [inputs, setinputs] = useState({
-        name:"", 
-        email:"",
-        password:"" 
-    })
-    const [isSignup, setIsSignup] = useState(false)
+    const dispatch = useDispatch();
+    const [inputs, setInputs] = useState({ name: "", email: "", password: "" });
+    const [isSignup, setIsSignup] = useState(initialSignupState);
+    const [message, setMessage] = useState("");
+    const [messageType, setMessageType] = useState("success");
+
+    useEffect(() => {
+        setIsSignup(queryParams.has("signup") ? queryParams.get("signup") === "true" : false);
+    }, [location.search]);
+
+    useEffect(() => {
+        if (queryParams.get("logout") === "true") {
+            setMessage("You have been logged out successfully.");
+            setMessageType("info");
+            setTimeout(() => setMessage(""), 3000);
+        }
+    }, [location.search]);
 
     const handleChange = (e) => {
-        setinputs((prevState)=>({
+        setInputs((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
-        }))
-    }
-    const sendRequest = async(type="login") => {
-        const res = await axios.post(`http://localhost:3000/api/user/${type}`, {
-            name: inputs.name,
-            email: inputs.email,
-            password: inputs.password
+        }));
+    };
+    const playSound = (soundFile) => {
+        const audio = new Audio(soundFile);
+        audio.play();
+    };
 
-        }).catch(err=>console.log(err))
+    const sendRequest = async (type = "login") => {
+        try {
+            const res = await axios.post(`http://localhost:3000/api/user/${type}`, {
+                name: inputs.name,
+                email: inputs.email,
+                password: inputs.password
+            });
+            return res.data;
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-        const data = await res.data;
-        console.log(data);
-        return data; 
-    }
-
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(inputs);
-        if (isSignup){
-            sendRequest("signup").then((data)=>localStorage.setItem("userId", data.user._id))
-            .then(()=>dispath(loginActions.login())).then(()=>navigate("/posts"))
-            .then(data=>console.log(data))
-        }
-        else {
-            sendRequest()
-            .then((data)=>localStorage.setItem("userId", data.user._id))
-            .then(()=>dispath(loginActions.login())).then(()=>navigate("/posts"))
-            .then(data=>console.log(data))
-        }
-    }
+        sendRequest(isSignup ? "signup" : "login")
+            .then((data) => {
+                if (data) {
+                    localStorage.setItem("userId", data.user._id);
+                    dispatch(loginActions.login());
+                    if (isSignup) {
+                        playSound("/sounds/signup.mp3");
+                        setMessage("Signup successful! You can now log in.");
+                        setMessageType("success");
+                        setTimeout(() => navigate("/login"), 2000);
+                    } else {
+                        playSound("/sounds/login.mp3");
+                        setMessage("Login successful! Redirecting...");
+                        setMessageType("success");
+                        setTimeout(() => navigate("/posts"), 2000);
+                    }
+                }
+            });
+    };
 
     return (
         <div>
@@ -56,12 +82,12 @@ const Login = () => {
                 <Box 
                     maxWidth={400} 
                     display="flex" 
-                    flexDirection={'column'} 
-                    alignItems='center' 
-                    justifyContent={'center'} 
-                    boxShadow={"5px 5px 15px rgba(0, 0, 0, 0.2)"} 
+                    flexDirection="column" 
+                    alignItems="center" 
+                    justifyContent="center" 
+                    boxShadow="5px 5px 15px rgba(0, 0, 0, 0.2)" 
                     padding={4} 
-                    margin='auto' 
+                    margin="auto" 
                     marginTop={5} 
                     borderRadius={10}
                     sx={{
@@ -69,15 +95,26 @@ const Login = () => {
                         transition: "all 0.3s",
                         "&:hover": {
                             transform: "scale(1.02)", 
-                            boxShadow: "8px 8px 20px rgba(0, 0, 0, 0,25)",
+                            boxShadow: "8px 8px 20px rgba(0, 0, 0, 0.25)",
                         }
                     }}
                 >
-                    <Typography variant="h3" padding={3} textAlign={"center"} sx={{fontFamily: "'Poppins', cursive", fontWeight: 600, color: "#FF8FAB"}}>
-                        {isSignup ? "Sign Up" : "Login" }
+                    <Typography 
+                        variant="h3" 
+                        padding={3} 
+                        textAlign="center"
+                        sx={{ fontFamily: "'Poppins', cursive", fontWeight: 600, color: "#FF8FAB" }}
+                    >
+                        {isSignup ? "Sign Up" : "Login"}
                     </Typography>
 
-                   { isSignup && (
+                    {message && (
+                        <Alert severity={messageType} sx={{ width: "100%", marginBottom: 2 }}>
+                            {message}
+                        </Alert>
+                    )}
+
+                    {isSignup && (
                         <TextField 
                             name="name" 
                             onChange={handleChange} 
@@ -85,75 +122,74 @@ const Login = () => {
                             placeholder="Name" 
                             margin="normal" 
                             fullWidth
-                            sx={{
-                                backgroundColor: '#FFF0F5', 
-                                borderRadius: 2, 
-                                "& input": {textAlign: "center"}, 
-                            }}
+                            sx={textFieldStyles}
                         />
-                   )}
-                   
-                   <TextField 
+                    )}
+
+                    <TextField 
                         name="email" 
                         onChange={handleChange} 
                         value={inputs.email} 
-                        type={'email'} 
+                        type="email" 
                         placeholder="Email" 
                         margin="normal" 
                         fullWidth
-                        sx={{
-                            backgroundColor: '#FFF0F5', 
-                            borderRadius: 2, 
-                            "& input": {textAlign: "center"}, 
-                        }}
+                        sx={textFieldStyles}
                     />
 
                     <TextField 
                         name="password" 
                         onChange={handleChange} 
                         value={inputs.password} 
-                        type={'password'} 
+                        type="password" 
                         placeholder="Password" 
                         margin="normal" 
                         fullWidth
-                        sx={{
-                            backgroundColor: '#FFF0F5', 
-                            borderRadius: 2, 
-                            "& input": {textAlign: "center"}, 
-                        }}
+                        sx={textFieldStyles}
                     />
+
                     <Button 
-                        type='submit' 
+                        type="submit" 
                         variant="contained" 
-                        sx={{borderRadius:3, 
-                            marginTop:3, 
-                            paddingX: 4, 
-                            backgroundColor: "#FF8FAB", 
-                            "&:hover": { backgroundColor: "FF6F91"}, 
-                            fontFamily: "'Poppins', cursive", 
-                            fontWeight: 500, 
-                        }} 
+                        sx={submitButtonStyles} 
                     >
                         Submit
                     </Button>
 
                     <Button 
-                        onClick={()=>setIsSignup(!isSignup)} 
-                        sx={{
-                            borderRadius:3, 
-                            marginTop: 3, 
-                            color: "#FF8FAB", 
-                            fontFamily: "'Poppins', cusrive", 
-                            fontWeight: 500, 
-                            "&:hover": { color: "#FF6F91" }, 
-                        }}
+                        onClick={() => setIsSignup(!isSignup)} 
+                        sx={changeButtonStyles}
                     >
                         Change To {isSignup ? "Login" : "Signup"}
                     </Button>
                 </Box>
             </form>
         </div>
-    ) 
-}
+    );
+};
 
-export default Login 
+const textFieldStyles = {
+    backgroundColor: '#FFF0F5', 
+    borderRadius: 2, 
+    "& input": { textAlign: "center" }, 
+};
+
+const submitButtonStyles = {
+    borderRadius: 3, 
+    marginTop: 3, 
+    backgroundColor: "#FF8FAB", 
+    "&:hover": { backgroundColor: "#FF6F91" }, 
+    fontFamily: "'Poppins', cusrive", 
+    fontWeight: 500, 
+};
+
+const changeButtonStyles = {
+    borderRadius: 3, 
+    marginTop: 3, 
+    color: "#FF8FAB", 
+    fontFamily: "'Poppins', cusrive", 
+    fontWeight: 500, 
+    "&:hover": { color: "#FF6F91" }, 
+};
+
+export default Login;
