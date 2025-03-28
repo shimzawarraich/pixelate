@@ -323,7 +323,7 @@ body {
     right:480px;
     top:15px;
     border: none;
-    outline: 2px solid #fff; 
+    outline: 2px solid #79845a; 
 }
 #resetall:hover {
     color: #FF8FAB; 
@@ -335,7 +335,7 @@ body {
     right:480px;
     top:200px;
     border: none;
-    outline: 2px solid #fff; 
+    outline: 2px solid #79845a; 
 }
 #resetj:hover {
     color: #FF8FAB; 
@@ -347,7 +347,7 @@ body {
     right:480px;
     top:250px;
     border: none;
-    outline: 2px solid #fff; 
+    outline: 2px solid #79845a; 
 }
 #resett:hover {
     color: #FF8FAB; 
@@ -359,7 +359,7 @@ body {
     right:480px;
     top:450px;
     border: none;
-    outline: 2px solid #fff; 
+    outline: 2px solid #79845a; 
 }
 #resetb:hover {
     color: #FF8FAB; 
@@ -371,7 +371,7 @@ body {
     right:480px;
     top:50px;
     border: none;
-    outline: 2px solid #fff; 
+    outline: 2px solid #79845a; 
 }
 #reseth:hover {
     color: #FF8FAB; 
@@ -384,7 +384,7 @@ body {
     right:5px;
     top:50px;
     border: none;
-    outline: 2px solid #fff; 
+    outline: 2px solid #79845a; 
 }
 #nexthead:hover {
     color: #FF8FAB; 
@@ -396,6 +396,8 @@ body {
     position:absolute;
     right:5px;
     top:200px;
+    border:none;
+    outline: 2px solid #79845a;
 }
 /* Change text color on hover */
 #nextjacket:hover {
@@ -410,7 +412,7 @@ body {
     right:5px;
     top:250px;
     border: none;
-    outline: 2px solid #FF8FAB; 
+    outline: 2px solid #79845a; 
 }
 #nexttop:hover {
     color: #FF8FAB; 
@@ -423,7 +425,7 @@ body {
     right:5px;
     top:450px;
     border: none;
-    outline: 2px solid #7e895e; 
+    outline: 2px solid #79845a; 
 }
 #nextbottom:hover {
     color: #FF8FAB; 

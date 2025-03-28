@@ -255,25 +255,25 @@ const Closet = () => {
       />
       <input
         type="button"
-        value="RESET"
+        value="REMOVE"
         id="resetj"
         onClick={resetjacket}
       />
       <input
         type="button"
-        value="RESET"
+        value="REMOVE"
         id="resett"
         onClick={resettop}
       />
       <input
         type="button"
-        value="RESET"
+        value="REMOVE"
         id="resetb"
         onClick={resetbottom}
       />
       <input
         type="button"
-        value="RESET"
+        value="REMOVE"
         id="reseth"
         onClick={resethead}
       />

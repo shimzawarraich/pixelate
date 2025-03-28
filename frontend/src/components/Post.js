@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFavorite, initialLikes, handlePostDelete }) => {
+const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFavorite, initialLikes, handlePostDelete, darkMode }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [likes, setLikes] = useState(initialLikes);
@@ -83,8 +83,9 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           padding: 1,
           boxShadow: "5px 5px 10px #ccc",
           borderRadius: "20px",
-          backgroundColor: "#EDCFD3",
-          display: "flex",
+          backgroundColor: darkMode ? "#333" : "#EDCFD3",
+          color: darkMode ? "#fff" : "#000",  
+                    display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
           ":hover": {
@@ -133,7 +134,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           sx={{ width: "100%", height: "300px", objectFit: "contain", borderRadius: "10px" }}
         />
         <CardContent>
-          <Typography variant="body2" sx={{ color: 'textSecondary' }}>
+          <Typography variant="body2" sx={{ color: darkMode ? "#fff" : 'textSecondary' }}>
             <b>{userName}{":"}</b> {description}
           </Typography>
         </CardContent>

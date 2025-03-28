@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from "./Post";
 import { BsSearch } from 'react-icons/bs';
-import { TextField, Select, MenuItem, Box, Typography, Grid, InputLabel, FormControl, IconButton, Button } from '@mui/material';
+import { TextField, Select, MenuItem, Box, Typography, Grid, InputLabel, FormControl, IconButton, Button} from '@mui/material';
 
-const Posts = () => {
+const Posts = ({darkMode}) => {
   const [posts, setPosts] = useState([]);
   const [productCategories, setProductCategories] = useState( [ "Top", "Pant", "Skirt", "Hijab", "Hat", "Dress"])
   const [searchVal, setSearchVal] = useState("");
@@ -97,7 +97,7 @@ const Posts = () => {
             onClick={handleResetFilters}
             sx={{
               minWidth: '120px',
-              backgroundColor: '#ff9eb5', 
+              backgroundColor: darkMode ? "#444" : "#FF8FAB", 
               color: '#ffffff', 
               '&:hover': {
                 backgroundColor: '#ff9eb5', 

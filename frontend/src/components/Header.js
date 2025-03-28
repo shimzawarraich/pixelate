@@ -17,6 +17,9 @@ const Header = ({ darkMode, setDarkMode }) => {
             position="sticky" 
             sx={{ 
                 background: darkMode ? "#333" : "#ffd7dd",
+                // backgroundImage: darkMode ? "url('/background-noir.png')" : "none",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 boxShadow: "FFF0F5",
             }}
         >
@@ -85,7 +88,12 @@ const Header = ({ darkMode, setDarkMode }) => {
                             LinkComponent={Link} 
                             to="/liked" 
                             label="My Liked Posts" 
-                            sx={tabStyles} />
+                            sx={{
+                                fontFamily: "'Poppins', cusrive",
+                                fontSize: "1rem", 
+                                color: "#7e895e", 
+                                "&:hover": {color: "#FF8FAB"}, 
+                            }} />
                         {/* New Tab for Outfit Creator */}
                         <Tab 
                                 LinkComponent={Link} 
@@ -120,14 +128,14 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 LinkComponent={Link} 
                                 to="/login"
                                 variant="contained" 
-                                sx={buttonStyles}
+                                sx={buttonStyles(darkMode)}
                             >
                                 Login
                             </Button>
                             <Button 
                                 onClick={() => navigate("/login?signup=true")} 
                                 variant="contained" 
-                                sx={buttonStyles} 
+                                sx={buttonStyles(darkMode)} 
                             >
                                 SignUp
                             </Button>
@@ -139,7 +147,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             LinkComponent={Link} 
                             to="/login" 
                             variant="contained" 
-                            sx={buttonStyles} 
+                            sx={buttonStyles(darkMode)} 
                         >
                             Logout
                         </Button>
@@ -165,20 +173,13 @@ const Header = ({ darkMode, setDarkMode }) => {
 };
 
 // Reusable styles
-const buttonStyles = {
+const buttonStyles = (darkMode) => ({
     margin: 1, 
     borderRadius: 20,
-    backgroundColor: "#FF8FAB", 
-    color: '#fff', 
-    fontFamily: "'Poppins', cusrive",
-    "&:hover": { backgroundColor: "#FFB6C1" }, 
-};
-
-const tabStyles = {
-    fontFamily: "'Poppins', cusrive",
-    fontSize: "1rem", 
-    color: "#7e895e", 
-    "&:hover": { color: "#FF8FAB" }, 
-};
+    backgroundColor: darkMode ? "#444" : "#FF8FAB",  // Darker color in dark mode
+    color: "#fff",
+    fontFamily: "'Poppins', cursive",
+    "&:hover": { backgroundColor: darkMode ? "#555" : "#FFB6C1" }, 
+});
 
 export default Header;

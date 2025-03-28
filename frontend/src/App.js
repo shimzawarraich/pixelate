@@ -24,7 +24,24 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
-  }, [darkMode]);
+    // if (darkMode) {
+    //   document.body.classList.add("dark-mode");
+    // } else {
+    //   document.body.classList.remove("dark-mode");
+    // }
+    document.body.style.backgroundImage = darkMode
+        ? "url('/background-noir.png')" 
+        : "url('/background.png')";
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundPosition = "center";
+        document.body.style.height = "100vh";
+        document.body.style.width = "100%";
+        document.body.style.margin = "0";
+        document.body.style.padding = "0";
+        document.body.style.backgroundAttachment = "fixed"; // Ensures background stays consistent when scrolling
+
+      }, [darkMode]);
 
   const lightTheme = createTheme({
     palette: {
