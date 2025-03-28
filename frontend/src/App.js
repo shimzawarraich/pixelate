@@ -11,12 +11,15 @@ import Outfit from "./components/Outfit";
 import Closet from "./components/Closet";
 
 
+
+
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
 function App() {
-  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.login.isLoggedIn || localStorage.getItem("isLoggedIn") === "true");
+
   
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("darkMode") === "true"
@@ -50,6 +53,7 @@ function App() {
       text: { primary: "#000000" },
     },
   });
+  
 
   const darkTheme = createTheme({
     palette: {
@@ -58,6 +62,7 @@ function App() {
       text: { primary: "#ffffff" },
     },
   });
+  
 
   // console.log(isLoggedIn);
   return (
@@ -65,7 +70,8 @@ function App() {
       <CssBaseline />
       <React.Fragment>
     <header>
-      <Header darkMode={darkMode} setDarkMode={setDarkMode}/>
+      {/* ✅ Move Header OUTSIDE <Routes> to ensure it always renders */}
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
     </header>
     <main>
       <Routes>

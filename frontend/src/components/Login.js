@@ -2,7 +2,7 @@ import { TextField, Typography, Box, Button, Alert } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import axios from "axios"; 
 import { useDispatch } from "react-redux"; 
-import { loginActions } from "../store"; 
+import { loginActions } from "../store/index"; 
 import { useNavigate, useLocation } from "react-router-dom"; 
 
 const Login = () => {
@@ -18,6 +18,8 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("success");
 
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     useEffect(() => {
         setIsSignup(queryParams.has("signup") ? queryParams.get("signup") === "true" : false);
     }, [location.search]);
@@ -53,8 +55,40 @@ const Login = () => {
             console.error(err);
         }
     };
+    const animateError = () => {
+        const passwordField = document.querySelector("input[name='password']");
+        if (!passwordField) return;
+        
+        passwordField.style.transition = "transform 0.1s ease-in-out";
+        
+        let count = 0;
+        const interval = setInterval(() => {
+            passwordField.style.transform = `translateX(${count % 2 === 0 ? "5px" : "-5px"})`;
+            count++;
+            if (count > 5) {
+                clearInterval(interval);
+                passwordField.style.transform = "translateX(0)";
+            }
+        }, 100);
+    };
+    
 
-    const handleSubmit = (e) => {
+    const handleLogin = async () => {
+        const response = await fetch("http://localhost:5000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }), 
+        });
+    
+        const data = await response.json();
+    
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          dispatch(loginActions.login()); 
+        }
+      };
+
+      const handleSubmit = async (e) => {
         e.preventDefault();
         sendRequest(isSignup ? "signup" : "login")
             .then((data) => {
@@ -63,18 +97,24 @@ const Login = () => {
                     dispatch(loginActions.login());
                     if (isSignup) {
                         playSound("/sounds/signup.mp3");
-                        setMessage("Signup successful! You can now log in.");
+                        setMessage("🎉 Signup successful! You can now log in. 💖");
                         setMessageType("success");
                         setTimeout(() => navigate("/login"), 2000);
                     } else {
                         playSound("/sounds/login.mp3");
-                        setMessage("Login successful! Redirecting...");
+                        setMessage("✅ Login successful! Redirecting... ✨");
                         setMessageType("success");
                         setTimeout(() => navigate("/posts"), 2000);
                     }
+                } else {
+                    // Wrong password effect
+                    setMessage("❌ Oops! Wrong password! 🥺💔 Try again, bestie! ✨");
+                    setMessageType("error");
+                    animateError(); 
                 }
             });
     };
+    
 
     return (
         <div>

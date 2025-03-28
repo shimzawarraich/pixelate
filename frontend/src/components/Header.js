@@ -9,7 +9,7 @@ import LightModeIcon from "@mui/icons-material/WbSunny";
 const Header = ({ darkMode, setDarkMode }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isLoggedIn = useSelector(state => state.isLoggedIn);
+    const isLoggedIn = useSelector(state => state.login.isLoggedIn || localStorage.getItem("isLoggedIn") === "true");
     const [value, setValue] = useState();
 
     return (

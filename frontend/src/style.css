@@ -33,7 +33,7 @@ body {
     line-height: 1;
 }
 ol, ul {
-    list-style: none;
+    list-stylf: none;
 }
 blockquote, q {
     quotes: none;
@@ -186,7 +186,7 @@ body {
     position:absolute;
     width:374px;
     height:666px;
-    background-image: url(../public/closet/pink-stripes-sweatertop.PNG);
+    background-image: url(../public/closet/pink-stripes-sweatertop.png);
 }
 .top3{
     position:absolute;
