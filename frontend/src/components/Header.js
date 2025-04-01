@@ -11,6 +11,10 @@ const Header = ({ darkMode, setDarkMode }) => {
     const navigate = useNavigate();
     const isLoggedIn = useSelector(state => state.login.isLoggedIn || localStorage.getItem("isLoggedIn") === "true");
     const [value, setValue] = useState();
+    const playSound = (soundFile) => {
+        const audio = new Audio(soundFile);
+        audio.play();
+    };
 
     return (
         <AppBar 
@@ -143,7 +147,12 @@ const Header = ({ darkMode, setDarkMode }) => {
                     )}
                     {isLoggedIn && (
                         <Button
-                            onClick={() => dispatch(loginActions.logout())}
+                            onClick={() => {
+                                playSound("/sounds/logout.mp3"); // Play the logout sound
+                                dispatch(loginActions.logout());
+                                // playSound("/sounds/logout.mp3"); // Play the logout sound
+
+                            }}
                             LinkComponent={Link} 
                             to="/" 
                             variant="contained" 

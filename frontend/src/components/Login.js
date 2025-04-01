@@ -28,6 +28,7 @@ const Login = () => {
         if (queryParams.get("logout") === "true") {
             setMessage("You have been logged out successfully.");
             setMessageType("info");
+            playSound("/sounds/logout.mp3"); // Play the logout sound
             setTimeout(() => setMessage(""), 3000);
         }
     }, [location.search]);
@@ -97,18 +98,18 @@ const Login = () => {
                     dispatch(loginActions.login());
                     if (isSignup) {
                         playSound("/sounds/signup.mp3");
-                        setMessage("🎉 Signup successful! You can now log in. 💖");
+                        setMessage("🌸 Signup successful! You can now log in. ✨");
                         setMessageType("success");
                         setTimeout(() => navigate("/login"), 2000);
                     } else {
                         playSound("/sounds/login.mp3");
-                        setMessage("✅ Login successful! Redirecting... ✨");
+                        setMessage("🌸 Login successful! Redirecting... ✨");
                         setMessageType("success");
                         setTimeout(() => navigate("/posts"), 2000);
                     }
                 } else {
                     // Wrong password effect
-                    setMessage("❌ Oops! Wrong password! 🥺💔 Try again, bestie! ✨");
+                    setMessage("🌸 Oops! Wrong password, try again! ✨");
                     setMessageType("error");
                     animateError(); 
                 }

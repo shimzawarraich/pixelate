@@ -56,6 +56,8 @@ const UserPosts = () => {
                   imageURL={post.image} 
                   userName={user.name} 
                   handlePostDelete={handlePostDelete} // Pass function to Post component
+                  createdAt={post.createdAt} // Pass the creation date to Post component
+
                 />
               </Grid>
             ))

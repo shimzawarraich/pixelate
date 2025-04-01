@@ -157,7 +157,8 @@ const Posts = ({darkMode}) => {
             userName={post.user.name}
             // initialIsFavorite={post.isFavorite}
             initialIsFavorite={post.likedBy.includes(localStorage.getItem("userId"))} // Fix heart per user
-            initialLikes={post.likes} 
+            initialLikes={post.likes}
+            createdAt={post.createdAt}
           />
           </Grid>
         ))

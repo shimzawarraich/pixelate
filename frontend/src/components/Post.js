@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFavorite, initialLikes, handlePostDelete, darkMode }) => {
+const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFavorite, initialLikes, handlePostDelete, darkMode, createdAt }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [likes, setLikes] = useState(initialLikes);
@@ -67,12 +67,16 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   };
 
   // Get current formatted date
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" }
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+  // const currentDate = new Date();
+  // const formattedDate = currentDate.toLocaleDateString('en-US', {
+  //   year: 'numeric',
+  //   month: 'long',
+  //   day: 'numeric',
+  // });
 
   return (
     <motion.div
@@ -142,7 +146,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
             </Avatar>
           }
           title={title}
-          subheader={formattedDate}
+          subheader={formatDate(createdAt)}
         />
         <CardMedia
           component="img"
