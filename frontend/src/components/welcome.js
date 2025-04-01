@@ -1,62 +1,68 @@
-// Welcome.js
-import { Box, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Box, Button, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 
 const Welcome = ({ onGetStarted }) => {
     return (
-        <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            minHeight="100vh"
-            textAlign="center"
-            padding={4}
+        <Box 
+            display="flex" 
+            flexDirection="column" 
+            alignItems="center" 
+            justifyContent="center" 
+            height="100vh"
             sx={{
-                background: 'linear-gradient(135deg, #FF8FAB 0%, #FFC2D1 100%)',
-                color: 'white',
+                backgroundColor: "#FFE4E1", 
+                textAlign: "center",
+                padding: 4,
             }}
         >
-            <Typography variant="h2" gutterBottom sx={{ fontWeight: 700, mb: 4 }}>
-                Pixelate
-            </Typography>
-            <Typography variant="h5" gutterBottom sx={{ mb: 4 }}>
-                A Fashion Retail Website 
-            </Typography>
-            <Box display="flex" gap={2}>
-                <Button
-                    variant="contained"
-                    onClick={onGetStarted}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+            >
+                <Typography 
+                    variant="h2" 
                     sx={{
-                        backgroundColor: 'white',
-                        color: '#FF8FAB',
-                        padding: '12px 24px',
-                        fontSize: '1.1rem',
-                        fontWeight: 600,
-                        '&:hover': {
-                            backgroundColor: '#f5f5f5',
-                        },
+                        fontFamily: "'Poppins', cursive", 
+                        fontWeight: 700, 
+                        color: "#FF69B4",
+                        marginBottom: 2
                     }}
                 >
-                    Get Started
-                </Button>
-                <Button
-                    variant="outlined"
+                    Pixelate
+                </Typography>
+                <Typography 
+                    variant="h5" 
                     sx={{
-                        borderColor: 'white',
-                        color: 'white',
-                        padding: '12px 24px',
-                        fontSize: '1.1rem',
-                        fontWeight: 600,
-                        '&:hover': {
-                            borderColor: '#f5f5f5',
-                            backgroundColor: 'rgba(255,255,255,0.1)',
-                        },
+                        fontFamily: "'Poppins', cursive", 
+                        fontWeight: 500, 
+                        color: "#FF1493",
+                        marginBottom: 4
                     }}
                 >
-                    Learn More
-                </Button>
-            </Box>
+                    A fashion retail company
+                </Typography>
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                    <Button 
+                        variant="contained" 
+                        onClick={onGetStarted} 
+                        sx={{
+                            backgroundColor: "#FF69B4", 
+                            color: "white", 
+                            fontFamily: "'Poppins', cursive", 
+                            fontWeight: 600,
+                            padding: "10px 20px",
+                            borderRadius: 3,
+                            "&:hover": {
+                                backgroundColor: "#FF1493"
+                            }
+                        }}
+                    >
+                        Get Started 
+                    </Button>
+                </motion.div>
+            </motion.div>
         </Box>
     );
 };

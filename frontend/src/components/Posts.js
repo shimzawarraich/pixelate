@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from "./Post";
 import { BsSearch } from 'react-icons/bs';
-import { TextField, Select, MenuItem, Box, Typography, Grid, InputLabel, FormControl, IconButton, Button} from '@mui/material';
+import { TextField, Select, MenuItem, Box, Typography, Grid, InputLabel, FormControl, IconButton, Button, InputAdornment} from '@mui/material';
 
 const Posts = ({darkMode}) => {
   const [posts, setPosts] = useState([]);
@@ -65,17 +65,24 @@ const Posts = ({darkMode}) => {
   //console.log("Fetched posts:", posts);
 
   return (
-    <Box sx={{ padding: 3 }}>
+    <Box sx={{ padding: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, marginBottom: 4}}>
-        <FormControl sx={{ minWidth: 120 }}>
+        <FormControl sx={{ minWidth: 180 }}>
           <InputLabel>Category</InputLabel>
           <Select
             value={selectedCategory}
             onChange={handleCategoryChange}
             label="Category"
+            sx={{backgroundColor: "rgba(255, 215, 221, 0.85)"}}
           >
             {productCategories.map((category) => (
-              <MenuItem key={category} value={category}>{category}</MenuItem>
+              <MenuItem key={category} 
+              value={category}
+              sx={{
+                background: category === selectedCategory 
+                  ? (darkMode ? "rgba(255,182,193,0.2)" : "rgba(255,182,193,0.3)") 
+                  : "transparent"
+              }}>{category}</MenuItem>
             ))}
           </Select>
           </FormControl>
@@ -86,11 +93,21 @@ const Posts = ({darkMode}) => {
             value={searchVal}
             onChange={(e) => setSearchVal(e.target.value)}
             onKeyPress={handleKeyPress}
-            sx={{ width: '300px' }}
+            sx={{ width: '300px',  '&.Mui-focused fieldset': {
+              borderColor: darkMode ? '#FF8FAB' : '#5a3d3d', 
+              borderWidth: '1px', 
+            }, backgroundColor: "rgba(255, 215, 221, 0.85)" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleSearchClick}>
+                    <BsSearch style={{ color: darkMode ? "#FFB6C1" : "#FF8FAB" }} />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            
           />
-          <IconButton onClick={handleSearchClick}>
-          <BsSearch/>
-          </IconButton>
 
           <Button 
             variant="outlined" 

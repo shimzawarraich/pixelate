@@ -1,3 +1,4 @@
+//import { motion } from 'framer-motion';
 import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Typography, Box, Snackbar, Alert } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -74,6 +75,13 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   });
 
   return (
+    /*
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.02 }}
+    >*/
     <>
       <Card
         sx={{
@@ -81,13 +89,15 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           height: "100%",
           margin: -1,
           padding: 1,
-          boxShadow: "5px 5px 10px #ccc",
-          borderRadius: "20px",
-          backgroundColor: darkMode ? "#333" : "#EDCFD3",
+          boxShadow: "5px 5px 10px #FFB6C1",
+          borderRadius: "16px",
+          background: darkMode ? "#333" : "#F2B8C2",
           color: darkMode ? "#fff" : "#000",  
                     display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
+          position: "relative", 
+          overflow: "hidden", 
           ":hover": {
             boxShadow: '10px 10px 20px #FFB6C1',
           },
@@ -133,7 +143,8 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           alt="post image"
           sx={{ width: "100%", height: "300px", objectFit: "contain", borderRadius: "10px" }}
         />
-        <CardContent>
+
+        <CardContent  sx={{ px: 1 }}>
           <Typography variant="body2" sx={{ color: darkMode ? "#fff" : 'textSecondary' }}>
             <b>{userName}{":"}</b> {description}
           </Typography>

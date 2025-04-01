@@ -9,6 +9,8 @@ import Login from "./components/Login";
 import LikedPosts from "./components/LikedPosts";
 import Outfit from "./components/Outfit"; 
 import Closet from "./components/Closet";
+import Welcome from "./components/welcome";
+
 
 
 
@@ -23,6 +25,10 @@ function App() {
   
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("darkMode") === "true"
+  );
+
+  const [hasSeenWelcome, setHasSeenWelcome] = useState(
+    localStorage.getItem("hasSeenWelcome") === "true"
   );
 
   useEffect(() => {
@@ -69,12 +75,25 @@ function App() {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
       <React.Fragment>
-    <header>
-      {/* ✅ Move Header OUTSIDE <Routes> to ensure it always renders */}
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-    </header>
+      <header>
+          {hasSeenWelcome && <Header darkMode={darkMode} setDarkMode={setDarkMode} />}
+      </header>
     <main>
       <Routes>
+      {!hasSeenWelcome ? (
+              <Route
+                path="/"
+                element={
+                  <Welcome
+                    onGetStarted={() => {
+                      localStorage.setItem("hasSeenWelcome", "true");
+                      setHasSeenWelcome(true);
+                    }}
+                  />
+                }
+              />
+            ) : null}
+        
         <Route path="/Login" element={<Login />} />
         {!isLoggedIn ? (
           <Route path="*" element={<Navigate to="/login" replace />} />

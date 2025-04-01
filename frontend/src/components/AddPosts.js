@@ -63,7 +63,7 @@ const AddBlog = () => {
                     alignItems="center"
                     minHeight="500px"
                     sx={{ 
-                        border: '3px solid #EEAAC3', 
+                        border: '3px solid #F2B8C2', 
                         borderRadius: '20px',
                         boxShadow: '10px 10px 20px #FFB6C1',
                         padding: 3, 
@@ -72,7 +72,7 @@ const AddBlog = () => {
                         display: 'flex',
                         flexDirection: 'column', 
                         width: '600px', 
-                        backgroundColor: '#FEFAF9'
+                        backgroundColor: '#ffd7dd'
                     }}
                 >
                     <InputLabel sx={labelStyles}>Title</InputLabel>

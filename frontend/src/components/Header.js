@@ -21,6 +21,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 boxShadow: "FFF0F5",
+                transition: "all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)"
             }}
         >
             <Toolbar>
@@ -34,7 +35,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                 <Typography 
                     variant="h4"
                     sx={{
-                        fontFamily: "'Poppins', cursive",
+                        fontFamily: "'Poppins'",
                         fontWeight: "bold", 
                         color: darkMode ? "#fff" : "#7e895e", 
                         textShadow: "2px 2px 5px rgba(179, 182, 128, 0.8)", 
@@ -50,6 +51,14 @@ const Header = ({ darkMode, setDarkMode }) => {
                         value={value} 
                         onChange={(e, val)=>setValue(val)}
                         TabIndicatorProps={{ style: { backgroundColor: darkMode ? "#ffcccb" : "#FF8FAB" } }}
+                        sx={{
+                            "& .MuiTab-root": {
+                                transition: "all 0.3s ease",
+                                "&:hover": {
+                                    transform: "translateY(-2px)"
+                                }
+                            }
+                        }}
                     >
                         <Tab 
                             LinkComponent={Link} 
