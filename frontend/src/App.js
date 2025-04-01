@@ -1,15 +1,17 @@
-import {Route, Routes, Navigate } from "react-router-dom";
+import { motion } from 'framer-motion';
+import {Route, Routes, Navigate, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Posts from "./components/Posts";
 import UserPosts from "./components/UserPosts";
 import AddPosts from "./components/AddPosts";
 import PostDetails from "./components/PostDetail";
 import Login from "./components/Login"; 
+import LandingPage from "./components/LandingPage";
 // import TryOn from "./components/TryOn"; 
 import LikedPosts from "./components/LikedPosts";
 import Outfit from "./components/Outfit"; 
 import Closet from "./components/Closet";
-import Welcome from "./components/welcome";
+import { AnimatePresence } from "framer-motion";
 
 
 
@@ -20,15 +22,11 @@ import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
 function App() {
-  const isLoggedIn = useSelector(state => state.login.isLoggedIn || localStorage.getItem("isLoggedIn") === "true");
-
   
+  const isLoggedIn = useSelector(state => state.login.isLoggedIn || localStorage.getItem("isLoggedIn") === "true");
+  const location = useLocation();
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("darkMode") === "true"
-  );
-
-  const [hasSeenWelcome, setHasSeenWelcome] = useState(
-    localStorage.getItem("hasSeenWelcome") === "true"
   );
 
   useEffect(() => {
@@ -49,7 +47,7 @@ function App() {
         document.body.style.margin = "0";
         document.body.style.padding = "0";
         document.body.style.backgroundAttachment = "fixed"; // Ensures background stays consistent when scrolling
-
+        document.body.style.position = "relative";
       }, [darkMode]);
 
   const lightTheme = createTheme({
@@ -72,28 +70,46 @@ function App() {
 
   // console.log(isLoggedIn);
   return (
+    <React.Fragment>
+  {/* Gradient overlay div - place this right after opening <body> */}
+  <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ 
+    opacity: 1,
+    backdropFilter: isLoggedIn ? 'blur(4px)' : 'blur(8px)',
+    WebkitBackdropFilter: isLoggedIn ? 'blur(4px)' : 'blur(8px)',
+  }}
+  transition={{ duration: 0.5 }}
+  style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: darkMode
+      ? isLoggedIn 
+        ? 'linear-gradient(135deg, rgba(50,50,50,0.4) 0%, rgba(35,35,35,0.6) 100%)'
+        : 'linear-gradient(135deg, rgba(40,40,40,0.7) 0%, rgba(25,25,25,0.9) 100%)'
+      : isLoggedIn
+        ? 'linear-gradient(135deg, rgba(255,240,245,0.4) 0%, rgba(255,245,250,0.6) 100%)'
+        : 'linear-gradient(135deg, rgba(255,230,240,0.6) 0%, rgba(255,240,245,0.9) 100%)',
+    zIndex: -1,
+  }}
+/>
+   <header>
+    <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+  </header>
+  
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
       <React.Fragment>
-      <header>
-          {hasSeenWelcome && <Header darkMode={darkMode} setDarkMode={setDarkMode} />}
-      </header>
     <main>
-      <Routes>
-      {!hasSeenWelcome ? (
-              <Route
-                path="/"
-                element={
-                  <Welcome
-                    onGetStarted={() => {
-                      localStorage.setItem("hasSeenWelcome", "true");
-                      setHasSeenWelcome(true);
-                    }}
-                  />
-                }
+      <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+              <Route 
+                path="/" 
+                element={isLoggedIn ? <Navigate to="/posts" replace /> : <LandingPage />} 
               />
-            ) : null}
-        
         <Route path="/Login" element={<Login />} />
         {!isLoggedIn ? (
           <Route path="*" element={<Navigate to="/login" replace />} />
@@ -110,9 +126,11 @@ function App() {
         </>
         )}
       </Routes>
+      </AnimatePresence>
     </main>
   </React.Fragment>
   </ThemeProvider>
+  </React.Fragment>
   );
 }
 

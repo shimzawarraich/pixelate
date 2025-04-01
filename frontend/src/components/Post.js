@@ -1,4 +1,4 @@
-//import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton, Typography, Box, Snackbar, Alert } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -75,13 +75,12 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   });
 
   return (
-    /*
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02 }}
-    >*/
+    >
     <>
       <Card
         sx={{
@@ -117,13 +116,21 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
         {/* Heart Icon Button for Favorite with Likes Count */}
         <Box display="flex" alignItems="center" justifyContent="flex-end" sx={{ position: 'relative' }}>
           {/* Prevent liking own post */}
+ 
+    <motion.div
+      whileTap={{ scale: 0.9 }} // Subtle press effect
+      transition={{ type: "spring", stiffness: 500, damping: 15 }}
+    >
 <IconButton 
   onClick={handleFavoriteToggle} 
   disabled={loading || isUser} // Disable if user owns the post
   sx={{ cursor: isUser ? "not-allowed" : "pointer", opacity: isUser ? 0.5 : 1 }}
 >
+
   {isFavorite ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon color='error' />}
+
 </IconButton>
+</motion.div>
 <Typography variant="body2" sx={{ marginLeft: "4px" }}>{likes}</Typography>
 
         </Box>
@@ -143,8 +150,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           alt="post image"
           sx={{ width: "100%", height: "300px", objectFit: "contain", borderRadius: "10px" }}
         />
-
-        <CardContent  sx={{ px: 1 }}>
+        <CardContent>
           <Typography variant="body2" sx={{ color: darkMode ? "#fff" : 'textSecondary' }}>
             <b>{userName}{":"}</b> {description}
           </Typography>
@@ -158,6 +164,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
         </Alert>
       </Snackbar>
     </>
+     </motion.div>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from "./Post";
+import { motion } from 'framer-motion';
 import { BsSearch } from 'react-icons/bs';
 import { TextField, Select, MenuItem, Box, Typography, Grid, InputLabel, FormControl, IconButton, Button, InputAdornment} from '@mui/material';
 
@@ -65,9 +66,9 @@ const Posts = ({darkMode}) => {
   //console.log("Fetched posts:", posts);
 
   return (
-    <Box sx={{ padding: 4 }}>
+    <Box sx={{ padding: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, marginBottom: 4}}>
-        <FormControl sx={{ minWidth: 180 }}>
+        <FormControl sx={{ minWidth: 120 }}>
           <InputLabel>Category</InputLabel>
           <Select
             value={selectedCategory}
@@ -76,13 +77,7 @@ const Posts = ({darkMode}) => {
             sx={{backgroundColor: "rgba(255, 215, 221, 0.85)"}}
           >
             {productCategories.map((category) => (
-              <MenuItem key={category} 
-              value={category}
-              sx={{
-                background: category === selectedCategory 
-                  ? (darkMode ? "rgba(255,182,193,0.2)" : "rgba(255,182,193,0.3)") 
-                  : "transparent"
-              }}>{category}</MenuItem>
+              <MenuItem key={category} value={category}>{category}</MenuItem>
             ))}
           </Select>
           </FormControl>
@@ -106,9 +101,12 @@ const Posts = ({darkMode}) => {
                 </InputAdornment>
               )
             }}
-            
           />
 
+          <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.70 }}
+          >
           <Button 
             variant="outlined" 
             onClick={handleResetFilters}
@@ -135,6 +133,7 @@ const Posts = ({darkMode}) => {
           >
             Show All
           </Button>
+          </motion.div>
         </Box>
     
         {showFilters && (
@@ -180,7 +179,7 @@ const Posts = ({darkMode}) => {
             transition: "all 0.3s ease-in-out",
           }}
         >
-          No posts found match your criteria
+           🌸 No posts found match your criteria ✨
         </Typography>
       )}
         </Grid>
