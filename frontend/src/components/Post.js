@@ -147,6 +147,8 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           }
           title={title}
           subheader={formatDate(createdAt)}
+          sx={{ textAlign: "left" }} // Ensures entire header is left-aligned
+
         />
         <CardMedia
           component="img"

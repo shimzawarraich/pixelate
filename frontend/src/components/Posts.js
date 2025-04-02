@@ -148,7 +148,6 @@ const Posts = ({darkMode}) => {
          posts.map((post) => (
           <Grid item xs={12} sm={6} md={4} key={post._id}>
           <Post 
-            key={post._id}
             id={post._id}
             isUser={localStorage.getItem("userId") === post.user._id} 
             title={post.title} 

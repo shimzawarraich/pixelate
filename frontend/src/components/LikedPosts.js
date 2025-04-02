@@ -47,7 +47,7 @@ const LikedPosts = () => {
       </Typography>
 
       {/* Post Grid */}
-      <Grid container spacing={5} justifyContent="center">
+      <Grid container spacing={7} justifyContent="center">
         {likedPosts.length > 0 ? (
           likedPosts.map((post) => (
             <Grid item xs={12} sm={6} md={4} key={post._id}>
@@ -60,6 +60,7 @@ const LikedPosts = () => {
                 userName={post.user.name}
                 initialIsFavorite={true} // It's in liked posts, so always true
                 initialLikes={post.likes} 
+                createdAt={post.createdAt}
               />
             </Grid>
           ))
