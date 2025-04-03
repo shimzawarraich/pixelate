@@ -74,7 +74,7 @@ const Posts = ({darkMode}) => {
             value={selectedCategory}
             onChange={handleCategoryChange}
             label="Category"
-            sx={{backgroundColor: "rgba(255, 215, 221, 0.85)"}}
+            sx={{backgroundColor: darkMode ? "rgba(51, 51, 51, 0.85)" : "rgba(255, 215, 221, 0.85)", borderRadius: '12px',}}
           >
             {productCategories.map((category) => (
               <MenuItem key={category} value={category}>{category}</MenuItem>
@@ -91,12 +91,12 @@ const Posts = ({darkMode}) => {
             sx={{ width: '300px',  '&.Mui-focused fieldset': {
               borderColor: darkMode ? '#FF8FAB' : '#5a3d3d', 
               borderWidth: '1px', 
-            }, backgroundColor: "rgba(255, 215, 221, 0.85)" }}
+            }, backgroundColor: darkMode ? "rgba(51, 51, 51, 0.85)" :"rgba(255, 215, 221, 0.85)", borderRadius: '12px' }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleSearchClick}>
-                    <BsSearch style={{ color: darkMode ? "#FFB6C1" : "#FF8FAB" }} />
+                    <BsSearch style={{ color: darkMode ? "#FFFFFF" : "#FF8FAB" }} />
                   </IconButton>
                 </InputAdornment>
               )
@@ -113,21 +113,21 @@ const Posts = ({darkMode}) => {
             sx={{
               minWidth: '120px',
               backgroundColor: darkMode ? "#444" : "#FF8FAB", 
-              color: '#ffffff', 
+              color: darkMode ? "#FFFFFF" : '#ffffff', 
               '&:hover': {
-                backgroundColor: '#ff9eb5', 
+                backgroundColor: darkMode ? "rgba(51, 51, 51, 0.85)" : '#ff9eb5', 
                 transform: 'scale(1.02)', 
               },
               textTransform: 'none',
               fontSize: '1rem',
               fontWeight: 600,
               borderRadius: '12px', 
-              boxShadow: '0 4px 8px rgba(255, 158, 181, 0.3)',
+              boxShadow:  darkMode ? "0 4px 8px rgba(28, 28, 28, 0.85)" :'0 4px 8px rgba(255, 158, 181, 0.3)',
               height: '56px',
               px: 3,
               whiteSpace: 'nowrap',
               transition: 'all 0.3s ease',
-              border: '2px solid rgba(255, 158, 181, 0.3)', 
+              border: darkMode ? "2px solid rgba(51, 51, 51, 0.85)" : '2px solid rgba(255, 158, 181, 0.3)', 
               fontFamily: '"Poppins"', 
             }}
           >
@@ -154,6 +154,7 @@ const Posts = ({darkMode}) => {
             description={post.description} 
             imageURL={post.image} 
             userName={post.user.name}
+            darkMode={darkMode} 
             // initialIsFavorite={post.isFavorite}
             initialIsFavorite={post.likedBy.includes(localStorage.getItem("userId"))} // Fix heart per user
             initialLikes={post.likes}
@@ -165,18 +166,18 @@ const Posts = ({darkMode}) => {
           <Typography 
           variant="h5" 
           sx={{
-            color: "#FF8FAB",
+            color: darkMode ? "#fff" : "#FF8FAB", // Soft Pink
             fontWeight: "bold", 
-            fontSize: "24px", 
+            fontSize: "24px", // Slightly Larger Text
             textAlign: "center", 
-            fontFamily: "'Dancing Script', cursive", 
-            backgroundColor: "#FFE4E1", 
+            fontFamily: "'Dancing Script', cursive", // Elegant Font
+            backgroundColor: darkMode ? "#333" : "#FFE4E1", // Light Pink Background
             padding: "15px", 
             borderRadius: "12px", 
-            boxShadow: "5px 5px 15px rgba(255, 182, 193, 0.5)", 
+            boxShadow: darkMode ? "5px 5px 15px #212121" : "5px 5px 15px rgba(255, 182, 193, 0.5)", // Soft Glow
             maxWidth: "60%", 
-            margin: "50px auto", 
-            transition: "all 0.3s ease-in-out",
+            margin: "50px auto", // Moves it lower on the page
+            transition: "all 0.3s ease-in-out", // Smooth Animation Effect
           }}
         >
            🌸 No posts found match your criteria ✨

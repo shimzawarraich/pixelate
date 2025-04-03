@@ -3,7 +3,7 @@ import axios from 'axios';
 import Post from "./Post";
 import { Typography, Box, Grid } from '@mui/material';
 
-const UserPosts = () => {
+const UserPosts = ({ darkMode }) => {
   const [user, setUser] = useState(null); // Ensure user starts as null
   const id = localStorage.getItem("userId");
 
@@ -33,8 +33,8 @@ const UserPosts = () => {
     <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ margin: 'auto', marginTop: 3, width: '100%', maxWidth: '1200px' }}> 
       <Typography variant='h3' 
       sx = {{
-        fontWeight:'bold', color:'#FF8FAB', fontFamily:"'Poppins', bold", marginBottom: 3,
-        backgroundColor: "rgba(255, 215, 221, 0.85)", // Translucent #FFD7DD
+        fontWeight:'bold', color: darkMode ? "#fff" :'#FF8FAB', fontFamily:"'Poppins', bold", marginBottom: 3,
+        backgroundColor: darkMode ? "#333" : "rgba(255, 215, 221, 0.85)", // Translucent #FFD7DD
         padding: "5px 10px", // Adds spacing around the text
         borderRadius: "5px", // Softens edges
       }}
@@ -49,6 +49,7 @@ const UserPosts = () => {
               <Grid item xs={12} sm={6} md={4} key={post._id}>
                 <Post 
                   id={post._id} 
+                  darkMode={darkMode} 
                   key={index} 
                   isUser={true} 
                   title={post.title} 
@@ -65,15 +66,15 @@ const UserPosts = () => {
             <Typography 
   variant="h5" 
   sx={{
-    color: "#FF8FAB", // Soft Pink
+    color: darkMode ? "#fff" : "#FF8FAB", // Soft Pink
     fontWeight: "bold", 
     fontSize: "24px", // Slightly Larger Text
     textAlign: "center", 
     fontFamily: "'Dancing Script', cursive", // Elegant Font
-    backgroundColor: "#FFE4E1", // Light Pink Background
+    backgroundColor: darkMode ? "#333" : "#FFE4E1", // Light Pink Background
     padding: "15px", 
     borderRadius: "12px", 
-    boxShadow: "5px 5px 15px rgba(255, 182, 193, 0.5)", // Soft Glow
+    boxShadow: darkMode ? "5px 5px 15px #212121" : "5px 5px 15px rgba(255, 182, 193, 0.5)", // Soft Glow
     maxWidth: "60%", 
     margin: "50px auto", // Moves it lower on the page
     transition: "all 0.3s ease-in-out", // Smooth Animation Effect

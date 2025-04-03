@@ -92,7 +92,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           height: "100%",
           margin: -1,
           padding: 1,
-          boxShadow: "5px 5px 10px #FFB6C1",
+          boxShadow: darkMode ? "5px 5px 10px #1C1C1C" : "5px 5px 10px #FFB6C1",
           borderRadius: "16px",
           background: darkMode ? "#333" : "#F2B8C2",
           color: darkMode ? "#fff" : "#000",  
@@ -102,7 +102,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           position: "relative", 
           overflow: "hidden", 
           ":hover": {
-            boxShadow: '10px 10px 20px #FFB6C1',
+            boxShadow: darkMode ? "10px 10px 20px #1C1C1C" :'10px 10px 20px #FFB6C1',
           },
         }}
       >
@@ -131,7 +131,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   sx={{ cursor: isUser ? "not-allowed" : "pointer", opacity: isUser ? 0.5 : 1 }}
 >
 
-  {isFavorite ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon color='error' />}
+  {isFavorite ? <FavoriteIcon color={darkMode ? "action" : "error"} /> : <FavoriteBorderIcon color={darkMode ? "action" : "error"} />}
 
 </IconButton>
 </motion.div>
@@ -141,7 +141,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
 
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: "#C58997" }} aria-label="recipe">
+            <Avatar sx={{ bgcolor: darkMode ? " #A9A9A9" : "#C58997" }} aria-label="recipe">
               {userName.charAt(0)}
             </Avatar>
           }

@@ -4,6 +4,90 @@
    License: none (public domain)
 */
 
+/* Add these at the top of your CSS file */
+:root {
+    /* Light mode colors */
+    --container-bg: rgb(126, 137, 94);
+    --panel-bg: rgb(231, 168, 216);
+    --button-bg: #ffd7dd;
+    --button-text: #7e895e;
+    --button-hover: #FF8FAB;
+    --button-border: #79845a;
+    
+    /* Dark mode colors */
+    --dark-container-bg: #2d2d2d;
+    --dark-panel-bg: #3a2a36;
+    --dark-button-bg: #474747;
+    --dark-button-text: #fff;
+    --dark-button-hover: #D3D3D3;
+    --dark-button-border: #474747;
+  }
+  
+  /* Update the existing styles to use variables */
+  #container {
+    background-color: var(--container-bg);
+  }
+  
+  #background {
+    background-color: var(--panel-bg);
+  }
+  
+  /* Button styles */
+  #resetall, #resetj, #resett, #resetb, #reseth,
+  #nexthead, #nextjacket, #nexttop, #nextbottom {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    outline: 2px solid var(--button-border);
+  }
+  
+  /* Hover states */
+  #resetall:hover, #resetj:hover, #resett:hover, #resetb:hover, #reseth:hover,
+  #nexthead:hover, #nextjacket:hover, #nexttop:hover, #nextbottom:hover {
+    color: var(--button-hover);
+  }
+  
+  /* Dark mode overrides */
+  body.dark-mode #container {
+    background-color: var(--dark-container-bg);
+  }
+  
+  body.dark-mode #background {
+    background-color: var(--dark-panel-bg);
+  }
+  
+  body.dark-mode #resetall,
+  body.dark-mode #resetj,
+  body.dark-mode #resett,
+  body.dark-mode #resetb,
+  body.dark-mode #reseth,
+  body.dark-mode #nexthead,
+  body.dark-mode #nextjacket,
+  body.dark-mode #nexttop,
+  body.dark-mode #nextbottom {
+    background-color: var(--dark-button-bg);
+    color: var(--dark-button-text);
+    outline: 2px solid var(--dark-button-border);
+  }
+  
+  body.dark-mode #resetall:hover,
+  body.dark-mode #resetj:hover,
+  body.dark-mode #resett:hover,
+  body.dark-mode #resetb:hover,
+  body.dark-mode #reseth:hover,
+  body.dark-mode #nexthead:hover,
+  body.dark-mode #nextjacket:hover,
+  body.dark-mode #nexttop:hover,
+  body.dark-mode #nextbottom:hover {
+    color: var(--dark-button-hover);
+  }
+  
+  /* Add smooth transitions */
+  #container, #background, 
+  #resetall, #resetj, #resett, #resetb, #reseth,
+  #nexthead, #nextjacket, #nexttop, #nextbottom {
+    transition: all 0.3s ease;
+  }
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -49,7 +133,7 @@ table {
 }
 
 body {
-    background-color: #f0f0f0; 
+    background-color: var(--bg-color); 
     background-image: url("../public/background.png"); 
     background-repeat: repeat; 
     background-size: cover; 
@@ -63,7 +147,7 @@ body {
     transform: translate(-50%, -50%);
     width: 574px;
     height :666px;
-   background-color: rgb(126, 137, 94);
+   background-color: var(--container-bg);
 }
 
 #background{
@@ -72,11 +156,48 @@ body {
     height:666px;
     left:100px; 
     right: 100px;
-    background-color: rgb(231, 168, 216);
+    background-color: var(--panel-bg);
     background-image: url("../public/closet/resized_background.png"); 
     /* change to background */
     
 }
+
+/* Dark Mode Overrides */
+body.dark-mode {
+    background-color: var(--dark-bg-color);
+    background-image: url("../public/background.png");
+  }
+  
+  body.dark-mode #container {
+    background-color: var(--dark-container-bg);
+  }
+  
+  body.dark-mode #background {
+    background-color: var(--dark-panel-bg);
+    background-image: url("../public/closet/resized_background.png");
+  }
+
+  button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    outline: 2px solid var(--button-border);
+  }
+  
+  body.dark-mode button {
+    background-color: var(--dark-button-bg);
+    color: var(--dark-button-text);
+    outline: 2px solid var(--dark-button-border);
+  }
+  
+  button:hover {
+    color: var(--button-hover);
+  }
+  
+  body.dark-mode button:hover {
+    color: var(--dark-button-hover);
+  }
+  
 
 /* #hairback{
      position:absolute;

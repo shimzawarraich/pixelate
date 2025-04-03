@@ -108,21 +108,21 @@ function App() {
       <Routes location={location} key={location.pathname}>
               <Route 
                 path="/" 
-                element={isLoggedIn ? <Navigate to="/posts" replace /> : <LandingPage />} 
+                element={isLoggedIn ? <Navigate to="/posts" replace /> : <LandingPage darkMode={darkMode} />} 
               />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/Login" element={<Login darkMode={darkMode}/>} />
         {!isLoggedIn ? (
           <Route path="*" element={<Navigate to="/login" replace />} />
         ) : (
         <>
-        <Route path="/posts" element={<Posts/>}/>
-        <Route path="/posts/add" element={<AddPosts/>}/>
-        <Route path="/userposts" element={<UserPosts/>}/>
-        <Route path="/userposts/:id" element={<PostDetails/>}/>
+        <Route path="/posts" element={<Posts darkMode={darkMode}/>}/>
+        <Route path="/posts/add" element={<AddPosts darkMode={darkMode}/>}/>
+        <Route path="/userposts" element={<UserPosts darkMode={darkMode}/>}/>
+        <Route path="/userposts/:id" element={<PostDetails darkMode={darkMode}/>}/>
         {/* <Route path="/tryOn" element={<TryOn/>}/> */}
-        <Route path="/liked" element={<LikedPosts />} />
+        <Route path="/liked" element={<LikedPosts darkMode={darkMode} />} />
         <Route path="/outfit" element={<Outfit/>}/>
-        <Route path="/closet" element={<Closet/>}/>
+        <Route path="/closet" element={<Closet darkMode={darkMode} />}/>
         </>
         )}
       </Routes>

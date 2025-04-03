@@ -4,7 +4,7 @@ import axios from "axios";
 import Post from "./Post";
 import { Box, Grid, Typography, Paper } from "@mui/material";
 
-const LikedPosts = () => {
+const LikedPosts = ({ darkMode }) => {
   const [likedPosts, setLikedPosts] = useState([]);
   const userId = localStorage.getItem("userId"); // Get logged-in user ID
 
@@ -30,7 +30,7 @@ const LikedPosts = () => {
         sx={{
           display: "inline-block", // Ensures background only wraps around text 
           mb: 3, 
-          color: "#FF8FAB", 
+          color: darkMode ? "#fff" : "#FF8FAB", 
           // color: "#EDCFD3",
           fontWeight: "bold",
           fontFamily: "'Poppins'",
@@ -40,7 +40,7 @@ const LikedPosts = () => {
           // backgroundColor: "rgba(237, 207, 211, 0.6)", // Translucent version of #EDCFD3
           // backgroundColor: "rgba(178, 168, 144, 0.85)", // Brighter translucent shade
           // backgroundColor: "rgba(126, 137, 94, 0.85)", // Brighter translucent #7E895E
-          backgroundColor: "rgba(255, 215, 221, 0.85)", // Translucent #FFD7DD
+          backgroundColor: darkMode ? "#333" : "rgba(255, 215, 221, 0.85)", // Translucent #FFD7DD
         }}
       >
         My Liked Posts
@@ -53,6 +53,7 @@ const LikedPosts = () => {
             <Grid item xs={12} sm={6} md={4} key={post._id}>
               <Post 
                 id={post._id}
+                darkMode={darkMode} 
                 isUser={userId === post.user._id} 
                 title={post.title} 
                 description={post.description} 
@@ -68,19 +69,19 @@ const LikedPosts = () => {
           <Paper 
             elevation={5} 
             sx={{
-              backgroundColor: "#FFE4E1",
+              backgroundColor: darkMode ? "#333" : "#FFE4E1",
               padding: "20px",
               borderRadius: "12px",
               maxWidth: "60%",
               margin: "50px auto",
               textAlign: "center",
-              boxShadow: "5px 5px 15px rgba(255, 182, 193, 0.5)"
+              boxShadow:  darkMode ? "5px 5px 15px #212121" : "5px 5px 15px rgba(255, 182, 193, 0.5)"
             }}
           >
             <Typography 
               variant="h5" 
               sx={{
-                color: "#FF8FAB", 
+                color: darkMode ? "#fff" : "#FF8FAB", 
                 fontWeight: "bold", 
                 fontSize: "24px", 
                 fontFamily: "'Dancing Script', cursive"

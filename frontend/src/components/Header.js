@@ -30,7 +30,7 @@ const Header = ({ darkMode, setDarkMode }) => {
             <Toolbar>
                 <Box display="flex" alignItems="center">
                     <img 
-                        src="/logo512.png" // path for logo
+                        src={darkMode ? "/Logo-noir.png" : "/logo512.png"} // path for logo
                         alt="Pixelate Logo" 
                         style={{ width: 40, height: 40, marginRight: 10 }} 
                     />
@@ -53,7 +53,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                         textColor='inherit' 
                         value={value} 
                         onChange={(e, val)=>setValue(val)}
-                        TabIndicatorProps={{ style: { backgroundColor: darkMode ? "#ffcccb" : "#FF8FAB" } }}
+                        TabIndicatorProps={{ style: { backgroundColor: darkMode ? "#F8F8FF" : "#FF8FAB" } }}
                     >
                         <Tab 
                             LinkComponent={Link} 
@@ -62,8 +62,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins', cusrive",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
-                                "&:hover": {color: "#FF8FAB"}, 
+                                color: darkMode ? "#F8F8FF" : "#7e895e", 
+                                "&:hover": {color: darkMode ? "#fff" : "#FF8FAB"}, 
                             }}
                         />
                         <Tab 
@@ -73,8 +73,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins', cusrive",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
-                                "&:hover": {color: "#FF8FAB"}, 
+                                color: darkMode ? "#F8F8FF" : "#7e895e", 
+                                "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                             }}
                         />
                         <Tab 
@@ -84,8 +84,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins', cusrive",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
-                                "&:hover": {color: "#FF8FAB"}, 
+                                color: darkMode ? "#F8F8FF" : "#7e895e", 
+                                "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                             }}
                         />
                         <Tab 
@@ -95,8 +95,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins', cusrive",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
-                                "&:hover": {color: "#FF8FAB"}, 
+                                color: darkMode ? "#F8F8FF" : "#7e895e", 
+                                "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                             }} />
                         {/* New Tab for Outfit Creator */}
                         <Tab 
@@ -106,8 +106,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 sx={{
                                     fontFamily: "'Poppins', cusrive",
                                     fontSize: "1rem", 
-                                    color: "#7e895e", 
-                                    "&:hover": {color: "#FF8FAB"}, 
+                                    color: darkMode ? "#F8F8FF" : "#7e895e", 
+                                    "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                                 }}
                         />
                         {/* New Tab for Closet */}
@@ -118,8 +118,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 sx={{
                                     fontFamily: "'Poppins', cusrive",
                                     fontSize: "1rem", 
-                                    color: "#7e895e", 
-                                    "&:hover": {color: "#FF8FAB"}, 
+                                    color: darkMode ? "#F8F8FF" :  "#7e895e", 
+                                    "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                                 }}
                         />
                     </Tabs>
@@ -188,7 +188,7 @@ const buttonStyles = (darkMode) => ({
     backgroundColor: darkMode ? "#444" : "#FF8FAB",  // Darker color in dark mode
     color: "#fff",
     fontFamily: "'Poppins', cursive",
-    "&:hover": { backgroundColor: darkMode ? "#555" : "#FFB6C1" }, 
+    "&:hover": { backgroundColor: darkMode ? "#555" : "#FFB6C1", color: darkMode ? "#fff" : "#fff" }, 
 });
 
 export default Header;

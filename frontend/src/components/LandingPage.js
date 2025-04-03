@@ -60,7 +60,7 @@ const LandingPage = ({ darkMode }) => {
                   fontWeight: 700,
                   mb: 3,
                   background: darkMode 
-                    ? 'linear-gradient(45deg, #FFB6C1, #FF8FAB)'
+                    ? 'linear-gradient(45deg, #ffffff, #F5F5F5)'
                     : 'linear-gradient(45deg, #7e895e, #5a3d3d)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -75,7 +75,7 @@ const LandingPage = ({ darkMode }) => {
                   fontFamily: "'Poppins', sans-serif",
                   fontWeight: 400,
                   mb: 4,
-                  color: darkMode ? '#FFB6C1' : '#7e895e',
+                  color: darkMode ? '#F5F5F5' : '#7e895e',
                   opacity: 0.9
                 }}
               >
@@ -94,18 +94,18 @@ const LandingPage = ({ darkMode }) => {
                     py: 1.5,
                     borderRadius: '50px',
                     background: darkMode 
-                      ? 'linear-gradient(45deg, #FF8FAB, #FF6B81)'
+                      ? 'linear-gradient(45deg, #444, #444)'
                       : 'linear-gradient(45deg, #FF8FAB, #FFB6C1)',
                     color: 'white',
                     fontFamily: "'Poppins', sans-serif",
                     fontWeight: 600,
                     fontSize: '1.1rem',
                     boxShadow: darkMode 
-                      ? '0 4px 20px rgba(255, 143, 171, 0.5)'
+                      ? '0 4px 20px rgba(85, 85, 85, 255)'
                       : '0 4px 20px rgba(255, 182, 193, 0.6)',
                     '&:hover': {
                       boxShadow: darkMode 
-                        ? '0 6px 25px rgba(255, 143, 171, 0.7)'
+                        ? '0 6px 25px rgba(85, 85, 85, 255)'
                         : '0 6px 25px rgba(255, 182, 193, 0.8)'
                     }
                   }}
@@ -125,7 +125,7 @@ const LandingPage = ({ darkMode }) => {
             >
               <Box
                 component="img"
-                src="/background.png"
+                src={darkMode ? "/background-noir.png" : "/background.png"}
                 alt="Fashion Illustration"
                 sx={{
                   width: '100%',
@@ -151,7 +151,7 @@ const LandingPage = ({ darkMode }) => {
               mb: 6,
               textAlign: 'center',
               background: darkMode 
-                ? 'linear-gradient(45deg, #FFB6C1, #FF8FAB)'
+                ? 'linear-gradient(45deg, #FFFFFF, #FFFFFF)'
                 : 'linear-gradient(45deg, #7e895e, #5a3d3d)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
@@ -186,7 +186,7 @@ const LandingPage = ({ darkMode }) => {
                     p: 4,
                     borderRadius: '16px',
                     background: darkMode 
-                      ? 'rgba(40, 40, 40, 0.7)'
+                      ? 'rgba(85, 85, 85, 0.7)'
                       : 'rgba(255, 255, 255, 0.7)',
                     backdropFilter: 'blur(10px)',
                     border: darkMode 
@@ -213,7 +213,7 @@ const LandingPage = ({ darkMode }) => {
                         fontFamily: "'Poppins'",
                         fontWeight: 600,
                         mb: 2,
-                        color: darkMode ? '#FF8FAB' : '#7e895e'
+                        color: darkMode ? '#FFFFFF' : '#7e895e'
                       }}
                     >
                       {feature.title}
