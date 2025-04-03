@@ -10,9 +10,9 @@ export function Droppable(props) {
   const style = {
     position: 'relative',
     border: isOver ? '2px dashed green' : '2px solid transparent',
-    width: '200px', // Adjust the mannequin size as needed
-    height: '400px', // Adjust the mannequin size as needed
-    background: '/url(clothes-img/mannequin-display.jpg)', // Mannequin image
+    width: '374px', // Adjust the mannequin size as needed
+    height: '666px', // Adjust the mannequin size as needed
+    background: '/url(closet/mannequin-display.jpg)', // Mannequin image
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   };
