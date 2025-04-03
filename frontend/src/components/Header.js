@@ -99,6 +99,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 color: darkMode ? "#F8F8FF" : "#7e895e", 
                                 "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                             }} />
+                
                         {/* New Tab for Outfit Creator */}
                         <Tab 
                                 LinkComponent={Link} 
@@ -123,6 +124,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                                     "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                                 }}
                         />
+
                         {/* New Tab for Help */}
                         <Tab 
                              LinkComponent={Link} 
@@ -133,7 +135,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                                  fontSize: "1rem", 
                                  color: darkMode ? "#F8F8FF" : "#7e895e", 
                                  "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
-                             }} />
+                        }} />
                     </Tabs>
                 </Box>}
 

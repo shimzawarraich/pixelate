@@ -34,18 +34,16 @@ Before you start, ensure that you have the following installed on your computer:
 This will start the backend server.
 
 ## Frontend
-1. **Install dnd kit**:
-    ```bash
-    npm install @dnd-kit/core
-    ```  
-2. **Navigate to the backend directory**:
+1. **Navigate to the backend directory**:
     ```bash
     cd frontend
     ```
-3. **Install dependencies**:
+2. **Install dependencies**:
     ```bash
     npm install
     npm install framer-motion
+    npm install @dnd-kit/core
+    npm install moment-timezone
     ```
 3. **Start the frontend server**:
     ```bash
