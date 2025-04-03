@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid, Box } from "@mui/material";
 
-const Help = () => {
+const Help = ({darkMode}) => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
@@ -25,7 +25,7 @@ return (
           fontFamily: "'Poppins'",
           padding: "5px 10px", // Adds spacing around the text
           borderRadius: "5px", // Softens edges
-          backgroundColor: "rgba(255, 215, 221, 0.5)", // Translucent #FFD7DD
+          backgroundColor: darkMode ? "rgba(96, 84, 86, 0.5)" :"rgba(255, 215, 221, 0.5)", // Translucent #FFD7DD
         }}
       >
         Help

@@ -7,6 +7,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import moment from "moment-timezone"; // Install: npm install moment-timezone
 
 const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFavorite, initialLikes, handlePostDelete, darkMode, createdAt }) => {
   const navigate = useNavigate();
@@ -68,8 +69,9 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
 
   // Get current formatted date
   const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" }
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    // const options = { year: "numeric", month: "long", day: "numeric" }
+    // return new Date(dateString).toLocaleDateString(undefined, options);
+    return moment.utc(dateString).tz(moment.tz.guess()).format("MMMM Do YYYY, h:mm A"); 
   };
   // const currentDate = new Date();
   // const formattedDate = currentDate.toLocaleDateString('en-US', {
@@ -147,7 +149,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
           }
           title={title}
           subheader={formatDate(createdAt)}
-          sx={{ textAlign: "left" }} // Ensures entire header is left-aligned
+          sx={{ textAlign: "left"}} // Ensures entire header is left-aligned
 
         />
         <CardMedia

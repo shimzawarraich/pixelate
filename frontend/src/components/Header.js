@@ -30,7 +30,7 @@ const Header = ({ darkMode, setDarkMode }) => {
             <Toolbar>
                 <Box display="flex" alignItems="center">
                     <img 
-                        src="/logo512.png" // path for logo
+                        src= {darkMode ? "/darklogo512.png" : "/logo512.png" } // path for logo
                         alt="Pixelate Logo" 
                         style={{ width: 40, height: 40, marginRight: 10 }} 
                     />
@@ -40,8 +40,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                     sx={{
                         fontFamily: "'Poppins', cursive",
                         fontWeight: "bold", 
-                        color: darkMode ? "#fff" : "#7e895e", 
-                        textShadow: "2px 2px 5px rgba(179, 182, 128, 0.8)", 
+                        color: darkMode ? "#C3D491" : "#7e895e", 
+                        textShadow: "2px 2px 5px rgba(179, 182, 128, 0.55)", 
                     }}
                 >
                     Pixelate
@@ -62,7 +62,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
+                                color: darkMode ? "#C3D491" : "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
@@ -73,7 +73,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
+                                color: darkMode ? "#C3D491" : "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
@@ -84,7 +84,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
+                                color: darkMode ? "#C3D491" : "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
@@ -96,7 +96,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
+                                color: darkMode ? "#C3D491" : "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }} />
                         {/* New Tab for Outfit Creator */}
@@ -107,7 +107,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 sx={{
                                     fontFamily: "'Poppins'",
                                     fontSize: "1rem", 
-                                    color: "#7e895e", 
+                                    color: darkMode ? "#C3D491" : "#7e895e", 
                                     "&:hover": {color: "#FF8FAB"}, 
                                 }}
                         />
@@ -119,7 +119,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 sx={{
                                     fontFamily: "'Poppins'",
                                     fontSize: "1rem", 
-                                    color: "#7e895e", 
+                                    color: darkMode ? "#C3D491" : "#7e895e", 
                                     "&:hover": {color: "#FF8FAB"}, 
                                 }}
                         />
@@ -131,7 +131,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             sx={{
                                 fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
-                                color: "#7e895e", 
+                                color: darkMode ? "#C3D491" : "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }} 
                         />

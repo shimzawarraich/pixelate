@@ -74,7 +74,7 @@ const Posts = ({darkMode}) => {
             value={selectedCategory}
             onChange={handleCategoryChange}
             label="Category"
-            sx={{backgroundColor: "rgba(255, 215, 221, 0.85)"}}
+            sx={{backgroundColor: darkMode ? "#444" :"rgba(255, 215, 221, 0.85)"}}
           >
             {productCategories.map((category) => (
               <MenuItem key={category} value={category}>{category}</MenuItem>
@@ -91,7 +91,7 @@ const Posts = ({darkMode}) => {
             sx={{ width: '300px',  '&.Mui-focused fieldset': {
               borderColor: darkMode ? '#FF8FAB' : '#5a3d3d', 
               borderWidth: '1px', 
-            }, backgroundColor: "rgba(255, 215, 221, 0.85)" }}
+            }, backgroundColor: darkMode ? "#444" : "rgba(255, 215, 221, 0.85)" }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -115,19 +115,19 @@ const Posts = ({darkMode}) => {
               backgroundColor: darkMode ? "#444" : "#FF8FAB", 
               color: '#ffffff', 
               '&:hover': {
-                backgroundColor: '#ff9eb5', 
+                backgroundColor: darkMode ? "#555" : "#ffb6c1", 
                 transform: 'scale(1.02)', 
               },
               textTransform: 'none',
               fontSize: '1rem',
               fontWeight: 600,
               borderRadius: '12px', 
-              boxShadow: '0 4px 8px rgba(255, 158, 181, 0.3)',
+              boxShadow: darkMode ? "5px 5px 15px rgba(255, 182, 193, 0.1)" : "5px 5px 15px rgba(255, 182, 193, 0.5)",
               height: '56px',
               px: 3,
               whiteSpace: 'nowrap',
               transition: 'all 0.3s ease',
-              border: '2px solid rgba(255, 158, 181, 0.3)', 
+              border: darkMode ? '2px solid rgba(255, 158, 181, 0.2)' : '2px solid rgba(255, 158, 181, 0.3)', 
               fontFamily: '"Poppins"', 
             }}
           >
@@ -171,10 +171,10 @@ const Posts = ({darkMode}) => {
             textAlign: "center", 
             fontFamily: "'Dancing Script', cursive", 
             // backgroundColor: "#FFE4E1", 
-            backgroundColor: "rgba(255, 228, 225, 0.5)",
+            backgroundColor: darkMode ? "rgba(62, 55, 55, 0.5)" : "rgba(255, 228, 225, 0.5)",
             padding: "15px", 
             borderRadius: "12px", 
-            boxShadow: "5px 5px 15px rgba(255, 182, 193, 0.5)", 
+            boxShadow: darkMode ? "5px 5px 15px rgba(255, 182, 193, 0.1)" : "5px 5px 15px rgba(255, 182, 193, 0.5)",
             maxWidth: "60%", 
             margin: "50px auto", 
             transition: "all 0.3s ease-in-out",

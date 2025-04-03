@@ -27,7 +27,8 @@ const postSchema = new Schema ({
         default: 0, // Track number of likes
     },
     likedBy: [{ type: mongoose.Types.ObjectId, ref: "User"}], // Track users who liked the post
-    createdAt: { type: Date, default: Date.now } // Stores the date when post is created
+    // createdAt: { type: Date, default: Date.now } // Stores the date when post is created
+}, { timestamps: true   // ensures createdAt is static
 
 });
 
