@@ -125,6 +125,7 @@ function App() {
         <Route path="/liked" element={<LikedPosts darkMode={darkMode} />} />
         <Route path="/outfit" element={<Outfit/>}/>
         <Route path="/closet" element={<Closet darkMode={darkMode} />}/>
+        <Route path="/help" element={<Help darkMode={darkMode} />}/>
         </>
         )}
 
