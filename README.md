@@ -45,6 +45,7 @@ This will start the backend server.
 3. **Install dependencies**:
     ```bash
     npm install
+    npm install framer-motion
     ```
 3. **Start the frontend server**:
     ```bash

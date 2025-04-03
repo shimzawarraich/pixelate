@@ -12,9 +12,7 @@ import LikedPosts from "./components/LikedPosts";
 import Outfit from "./components/Outfit"; 
 import Closet from "./components/Closet";
 import { AnimatePresence } from "framer-motion";
-
-
-
+import Help from "./components/Help"; // Import the Help component
 
 
 import React, { useState, useEffect } from "react";
@@ -25,12 +23,13 @@ function App() {
   
   const isLoggedIn = useSelector(state => state.login.isLoggedIn || localStorage.getItem("isLoggedIn") === "true");
   const location = useLocation();
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
+  const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode") === "true");
 
   useEffect(() => {
-    localStorage.setItem("darkMode", darkMode);
+    const favicon = document.getElementById('favicon');
+    if (favicon){
+      favicon.href = darkMode ? '/darkfavicon.ico' : '/favicon.ico';
+    }
     // if (darkMode) {
     //   document.body.classList.add("dark-mode");
     // } else {
@@ -39,16 +38,19 @@ function App() {
     document.body.style.backgroundImage = darkMode
         ? "url('/background-noir.png')" 
         : "url('/background.png')";
-        document.body.style.backgroundSize = "cover";
-        document.body.style.backgroundRepeat = "no-repeat";
-        document.body.style.backgroundPosition = "center";
-        document.body.style.height = "100vh";
-        document.body.style.width = "100%";
-        document.body.style.margin = "0";
-        document.body.style.padding = "0";
-        document.body.style.backgroundAttachment = "fixed"; // Ensures background stays consistent when scrolling
-        document.body.style.position = "relative";
-      }, [darkMode]);
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.height = "100vh";
+    document.body.style.width = "100%";
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.body.style.backgroundAttachment = "fixed"; // Ensures background stays consistent when scrolling
+    document.body.style.position = "relative";
+
+    localStorage.setItem("darkMode", darkMode);
+
+  }, [darkMode]);
 
   const lightTheme = createTheme({
     palette: {
@@ -108,23 +110,26 @@ function App() {
       <Routes location={location} key={location.pathname}>
               <Route 
                 path="/" 
-                element={isLoggedIn ? <Navigate to="/posts" replace /> : <LandingPage />} 
+                element={isLoggedIn ? <Navigate to="/posts" replace /> : <LandingPage darkMode={darkMode} />} 
               />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/Login" element={<Login darkMode={darkMode}/>} />
         {!isLoggedIn ? (
           <Route path="*" element={<Navigate to="/login" replace />} />
         ) : (
         <>
-        <Route path="/posts" element={<Posts/>}/>
-        <Route path="/posts/add" element={<AddPosts/>}/>
-        <Route path="/userposts" element={<UserPosts/>}/>
-        <Route path="/userposts/:id" element={<PostDetails/>}/>
+        <Route path="/posts" element={<Posts darkMode={darkMode}/>}/>
+        <Route path="/posts/add" element={<AddPosts darkMode={darkMode}/>}/>
+        <Route path="/userposts" element={<UserPosts darkMode={darkMode}/>}/>
+        <Route path="/userposts/:id" element={<PostDetails darkMode={darkMode}/>}/>
         {/* <Route path="/tryOn" element={<TryOn/>}/> */}
-        <Route path="/liked" element={<LikedPosts />} />
+        <Route path="/liked" element={<LikedPosts darkMode={darkMode} />} />
         <Route path="/outfit" element={<Outfit/>}/>
-        <Route path="/closet" element={<Closet/>}/>
+        <Route path="/closet" element={<Closet darkMode={darkMode} />}/>
+        <Route path="/help" element={<Help darkMode={darkMode} />}/>
         </>
         )}
+
+
       </Routes>
       </AnimatePresence>
     </main>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import '../style.css';
 
-const Closet = () => {
+const Closet = ({ darkMode }) => {
   const [state, setState] = useState({h: 0, i: 0, j: 0, k: 0});
 
   const resetAll = () => {
@@ -211,6 +211,19 @@ const Closet = () => {
         setState({ ...state, k: 0 });
     }
   };
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+
+    return () => {
+      document.body.classList.remove('dark-mode');
+    };
+  }, [darkMode]);
+
 
   return (
     <div id="container">

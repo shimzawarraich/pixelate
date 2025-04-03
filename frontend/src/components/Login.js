@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { loginActions } from "../store/index"; 
 import { useNavigate, useLocation } from "react-router-dom"; 
 
-const Login = () => {
+const Login = ({ darkMode, setDarkMode }) => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     
@@ -132,7 +132,7 @@ const Login = () => {
                     marginTop={5} 
                     borderRadius={10}
                     sx={{
-                        backgroundColor: "white",
+                        backgroundColor: darkMode ? "#2E2E2E" : "white",
                         transition: "all 0.3s",
                         "&:hover": {
                             transform: "scale(1.02)", 
@@ -144,7 +144,7 @@ const Login = () => {
                         variant="h3" 
                         padding={3} 
                         textAlign="center"
-                        sx={{ fontFamily: "'Poppins', cursive", fontWeight: 600, color: "#FF8FAB" }}
+                        sx={{ fontFamily: "'Poppins', cursive", fontWeight: 600, color: darkMode ? "#FFFFFF" : "#FF8FAB" }}
                     >
                         {isSignup ? "Sign Up" : "Login"}
                     </Typography>
@@ -163,7 +163,7 @@ const Login = () => {
                             placeholder="Name" 
                             margin="normal" 
                             fullWidth
-                            sx={textFieldStyles}
+                            sx={textFieldStyles(darkMode)}
                         />
                     )}
 
@@ -175,7 +175,7 @@ const Login = () => {
                         placeholder="Email" 
                         margin="normal" 
                         fullWidth
-                        sx={textFieldStyles}
+                        sx={textFieldStyles(darkMode)}
                     />
 
                     <TextField 
@@ -186,20 +186,20 @@ const Login = () => {
                         placeholder="Password" 
                         margin="normal" 
                         fullWidth
-                        sx={textFieldStyles}
+                        sx={textFieldStyles(darkMode)}
                     />
 
                     <Button 
                         type="submit" 
                         variant="contained" 
-                        sx={submitButtonStyles} 
+                        sx={submitButtonStyles(darkMode)} 
                     >
                         Submit
                     </Button>
 
                     <Button 
                         onClick={() => setIsSignup(!isSignup)} 
-                        sx={changeButtonStyles}
+                        sx={changeButtonStyles(darkMode)}
                     >
                         Change To {isSignup ? "Login" : "Signup"}
                     </Button>
@@ -209,28 +209,28 @@ const Login = () => {
     );
 };
 
-const textFieldStyles = {
-    backgroundColor: '#FFF0F5', 
+const textFieldStyles = (darkMode) => ( {
+    backgroundColor: darkMode ? "#3B3B3B" : '#FFF0F5', 
     borderRadius: 2, 
     "& input": { textAlign: "center" }, 
-};
+});
 
-const submitButtonStyles = {
+const submitButtonStyles = (darkMode) => ({
     borderRadius: 3, 
     marginTop: 3, 
-    backgroundColor: "#FF8FAB", 
-    "&:hover": { backgroundColor: "#FF6F91" }, 
+    backgroundColor: darkMode ? "#4A4A4A" : "#FF8FAB", 
+    "&:hover": { backgroundColor: darkMode ? "#808080" : "#FF6F91", color: darkMode ? "#FFFFFF" : "#FF6F91"}, 
     fontFamily: "'Poppins', cusrive", 
     fontWeight: 500, 
-};
+});
 
-const changeButtonStyles = {
+const changeButtonStyles = (darkMode) => ({
     borderRadius: 3, 
     marginTop: 3, 
-    color: "#FF8FAB", 
+    color: darkMode ? "#FFFFFF" : "#FF8FAB", 
     fontFamily: "'Poppins', cusrive", 
     fontWeight: 500, 
-    "&:hover": { color: "#FF6F91" }, 
-};
+    "&:hover": { backgroundColor: darkMode ? "#FFFFFF" : "#FF6F91", color: darkMode ? "#4A4A4A" : "#FF6F91" }, 
+});
 
 export default Login;

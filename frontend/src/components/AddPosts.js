@@ -3,9 +3,9 @@ import { TextField, Box, InputLabel, Button, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom"; // For redirection
 import axios from "axios"; 
 
-const labelStyles = { mb: 1, mt: 2, fontSize: '20px', fontWeight: 'bold', color: "#FF8FAB", fontFamily: "'Poppins', Bold", textAlign: 'left', marginBottom: '4px' };
+const labelStyles = (darkMode) => ({ mb: 1, mt: 2, fontSize: '20px', fontWeight: 'bold', color: darkMode ? " #ffffff" : "#FF8FAB", fontFamily: "'Poppins', Bold", textAlign: 'left', marginBottom: '4px' });
 
-const AddBlog = () => {
+const AddBlog = ({ darkMode }) => {
     const [inputs, setInputs] = useState({
         title: "", 
         description: "",
@@ -31,6 +31,7 @@ const AddBlog = () => {
                 user: localStorage.getItem("userId")
             });
 
+            console.log("Post Created:", res.data); // 🔍 Log full response
             return res.data;
         } catch (err) {
             console.error(err);
@@ -63,19 +64,19 @@ const AddBlog = () => {
                     alignItems="center"
                     minHeight="500px"
                     sx={{ 
-                        border: '3px solid #F2B8C2', 
+                        border: darkMode ? "3px solid #474747" : '3px solid #F2B8C2', 
                         borderRadius: '20px',
-                        boxShadow: '10px 10px 20px #FFB6C1',
+                        boxShadow: darkMode ? "10px 10px 20px rgba(0, 0, 0, 0.25)" :'10px 10px 20px #FFB6C1',
                         padding: 3, 
                         margin: 'auto', 
                         marginTop: 3, 
                         display: 'flex',
                         flexDirection: 'column', 
                         width: '600px', 
-                        backgroundColor: '#ffd7dd'
+                        backgroundColor: darkMode ? " #2E2E2E" : '#ffd7dd'
                     }}
                 >
-                    <InputLabel sx={labelStyles}>Title</InputLabel>
+                    <InputLabel sx={labelStyles(darkMode)}>Title</InputLabel>
                     <TextField 
                         name="title" 
                         onChange={handleChange} 
@@ -83,10 +84,10 @@ const AddBlog = () => {
                         margin='normal' 
                         variant="outlined" 
                         fullWidth 
-                        sx={{ backgroundColor: '#FFF0F5', borderRadius: '10px', '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#F1DFDD', }, '&:hover fieldset': { borderColor: '#EEAAC3', }, }, }}
+                        sx={{ backgroundColor: darkMode ? " #3B3B3B" : '#FFF0F5', borderRadius: '10px', '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: darkMode ? " #474747" : '#F1DFDD', }, '&:hover fieldset': { borderColor: darkMode ? " #fff" : '#EEAAC3', }, }, }}
                     />
 
-                    <InputLabel sx={labelStyles}>Description</InputLabel>
+                    <InputLabel sx={labelStyles(darkMode)}>Description</InputLabel>
                     <TextField 
                         name="description" 
                         onChange={handleChange} 
@@ -96,10 +97,10 @@ const AddBlog = () => {
                         fullWidth 
                         multiline 
                         rows={4} 
-                        sx={{ backgroundColor: '#FFF0F5', borderRadius: '10px', '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#F1DFDD', }, '&:hover fieldset': { borderColor: '#EEAAC3', }, }, }}
+                        sx={{ backgroundColor: darkMode ? " #3B3B3B" : '#FFF0F5', borderRadius: '10px', '& .MuiOutlinedInput-root': { '& fieldset': { borderColor:  darkMode ? " #474747" : '#F1DFDD', }, '&:hover fieldset': { borderColor: darkMode ? " #fff" : '#EEAAC3', }, }, }}
                     />
 
-                    <InputLabel sx={labelStyles}>ImageURL</InputLabel>
+                    <InputLabel sx={labelStyles(darkMode)}>ImageURL</InputLabel>
                     <TextField 
                         name="imageURL" 
                         onChange={handleChange} 
@@ -107,7 +108,7 @@ const AddBlog = () => {
                         margin='normal' 
                         variant="outlined" 
                         fullWidth 
-                        sx={{ backgroundColor: '#FFF0F5', borderRadius: '10px', '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#F1DFDD', }, '&:hover fieldset': { borderColor: '#EEAAC3', }, }, }}
+                        sx={{ backgroundColor: darkMode ? " #3B3B3B" : '#FFF0F5', borderRadius: '10px', '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: darkMode ? " #474747" : '#F1DFDD', }, '&:hover fieldset': { borderColor: darkMode ? " #fff" : '#EEAAC3', }, }, }}
                     />
 
                     <Button 
@@ -117,12 +118,12 @@ const AddBlog = () => {
                             borderRadius:'20px',
                             padding: '8px 16px', 
                             marginTop: '16px', 
-                            backgroundColor: "#FF8FAB",
+                            backgroundColor: darkMode ? " #4A4A4A" : "#FF8FAB",
                             color: "white", 
                             fontFamily: "'Poppins', Bold", 
                             fontWeight: 'bold',
                             fontSize: '14px', 
-                            "&:hover": { color: "#FF1493" }, 
+                            "&:hover": { color: darkMode ? "#808080" : "#FF1493" }, 
                         }} 
                     >
                         Post
