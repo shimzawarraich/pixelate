@@ -40,7 +40,7 @@ const LikedPosts = () => {
           // backgroundColor: "rgba(237, 207, 211, 0.6)", // Translucent version of #EDCFD3
           // backgroundColor: "rgba(178, 168, 144, 0.85)", // Brighter translucent shade
           // backgroundColor: "rgba(126, 137, 94, 0.85)", // Brighter translucent #7E895E
-          backgroundColor: "rgba(255, 215, 221, 0.85)", // Translucent #FFD7DD
+          backgroundColor: "rgba(255, 215, 221, 0.5)", // Translucent #FFD7DD
         }}
       >
         My Liked Posts
@@ -68,7 +68,7 @@ const LikedPosts = () => {
           <Paper 
             elevation={5} 
             sx={{
-              backgroundColor: "#FFE4E1",
+              backgroundColor: "rgba(255, 228, 225, 0.5)",
               padding: "20px",
               borderRadius: "12px",
               maxWidth: "60%",

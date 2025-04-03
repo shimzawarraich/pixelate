@@ -12,8 +12,7 @@ import LikedPosts from "./components/LikedPosts";
 import Outfit from "./components/Outfit"; 
 import Closet from "./components/Closet";
 import { AnimatePresence } from "framer-motion";
-
-
+import Help from "./components/Help"; // Import the Help component
 
 
 
@@ -123,8 +122,12 @@ function App() {
         <Route path="/liked" element={<LikedPosts />} />
         <Route path="/outfit" element={<Outfit/>}/>
         <Route path="/closet" element={<Closet/>}/>
+        <Route path="/help" element={<Help />} />  {/* Add Help Page */}
+
         </>
         )}
+
+
       </Routes>
       </AnimatePresence>
     </main>

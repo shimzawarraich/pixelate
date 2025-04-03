@@ -192,7 +192,7 @@ const Login = () => {
                     <Button 
                         type="submit" 
                         variant="contained" 
-                        sx={submitButtonStyles} 
+                        sx={submitButtonStyles}
                     >
                         Submit
                     </Button>

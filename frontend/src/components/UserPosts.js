@@ -34,7 +34,7 @@ const UserPosts = () => {
       <Typography variant='h3' 
       sx = {{
         fontWeight:'bold', color:'#FF8FAB', fontFamily:"'Poppins', bold", marginBottom: 3,
-        backgroundColor: "rgba(255, 215, 221, 0.85)", // Translucent #FFD7DD
+        backgroundColor: "rgba(255, 215, 221, 0.5)", // Translucent #FFD7DD
         padding: "5px 10px", // Adds spacing around the text
         borderRadius: "5px", // Softens edges
       }}
@@ -70,7 +70,9 @@ const UserPosts = () => {
     fontSize: "24px", // Slightly Larger Text
     textAlign: "center", 
     fontFamily: "'Dancing Script', cursive", // Elegant Font
-    backgroundColor: "#FFE4E1", // Light Pink Background
+    // backgroundColor: "#FFE4E1", // Light Pink Background
+    backgroundColor: "rgba(255, 228, 225, 0.5)",
+    
     padding: "15px", 
     borderRadius: "12px", 
     boxShadow: "5px 5px 15px rgba(255, 182, 193, 0.5)", // Soft Glow

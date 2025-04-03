@@ -60,7 +60,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             to="/posts" 
                             label="All Posts"
                             sx={{
-                                fontFamily: "'Poppins', cusrive",
+                                fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
                                 color: "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
@@ -71,7 +71,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             to="/userposts" 
                             label="My Posts"
                             sx={{
-                                fontFamily: "'Poppins', cusrive",
+                                fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
                                 color: "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
@@ -82,18 +82,19 @@ const Header = ({ darkMode, setDarkMode }) => {
                             to="/posts/add" 
                             label="Add Posts"
                             sx={{
-                                fontFamily: "'Poppins', cusrive",
+                                fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
                                 color: "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
                             }}
                         />
+                        {/* New Tab for my Liked Posts */}
                         <Tab 
                             LinkComponent={Link} 
                             to="/liked" 
                             label="My Liked Posts" 
                             sx={{
-                                fontFamily: "'Poppins', cusrive",
+                                fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
                                 color: "#7e895e", 
                                 "&:hover": {color: "#FF8FAB"}, 
@@ -104,7 +105,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 to="/outfit" 
                                 label="Try-On"
                                 sx={{
-                                    fontFamily: "'Poppins', cusrive",
+                                    fontFamily: "'Poppins'",
                                     fontSize: "1rem", 
                                     color: "#7e895e", 
                                     "&:hover": {color: "#FF8FAB"}, 
@@ -116,11 +117,23 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 to="/closet" 
                                 label="Closet"
                                 sx={{
-                                    fontFamily: "'Poppins', cusrive",
+                                    fontFamily: "'Poppins'",
                                     fontSize: "1rem", 
                                     color: "#7e895e", 
                                     "&:hover": {color: "#FF8FAB"}, 
                                 }}
+                        />
+                        {/* New Tab for help */}
+                        <Tab 
+                            LinkComponent={Link} 
+                            to="/help" 
+                            label="Help" 
+                            sx={{
+                                fontFamily: "'Poppins'",
+                                fontSize: "1rem", 
+                                color: "#7e895e", 
+                                "&:hover": {color: "#FF8FAB"}, 
+                            }} 
                         />
                     </Tabs>
                 </Box>}
