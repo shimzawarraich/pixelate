@@ -123,6 +123,17 @@ const Header = ({ darkMode, setDarkMode }) => {
                                     "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                                 }}
                         />
+                        {/* New Tab for Help */}
+                        <Tab 
+                             LinkComponent={Link} 
+                             to="/help" 
+                             label="Help" 
+                             sx={{
+                                 fontFamily: "'Poppins'",
+                                 fontSize: "1rem", 
+                                 color: darkMode ? "#F8F8FF" : "#7e895e", 
+                                 "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
+                             }} />
                     </Tabs>
                 </Box>}
 

@@ -19,13 +19,13 @@ return (
         sx={{
           display: "inline-block", // Ensures background only wraps around text 
           mb: 3, 
-          color: "#FF8FAB", 
+          color: darkMode ? "#fff" : "#FF8FAB", 
           // color: "#EDCFD3",
           fontWeight: "bold",
           fontFamily: "'Poppins'",
           padding: "5px 10px", // Adds spacing around the text
           borderRadius: "5px", // Softens edges
-          backgroundColor: darkMode ? "rgba(96, 84, 86, 0.5)" :"rgba(255, 215, 221, 0.5)", // Translucent #FFD7DD
+          backgroundColor: darkMode ? "#333" :"rgba(255, 215, 221, 0.5)", // Translucent #FFD7DD
         }}
       >
         Help
