@@ -71,7 +71,7 @@ const Post = ({ title, description, imageURL, userName, isUser, id, initialIsFav
   const formatDate = (dateString) => {
     // const options = { year: "numeric", month: "long", day: "numeric" }
     // return new Date(dateString).toLocaleDateString(undefined, options);
-    return moment.utc(dateString).tz(moment.tz.guess()).format("MMMM Do YYYY, h:mm A"); 
+    return moment.utc(dateString).tz(moment.tz.guess()).format(" Do MMMM YYYY, h:mm A"); 
   };
   // const currentDate = new Date();
   // const formattedDate = currentDate.toLocaleDateString('en-US', {
