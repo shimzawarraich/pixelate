@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Posts from "./components/Posts";
 import UserPosts from "./components/UserPosts";
 import AddPosts from "./components/AddPosts";
-import PostDetail from "./components/PostDetail";
+import PostDetails from "./components/PostDetail";
 import Login from "./components/Login"; 
 import LandingPage from "./components/LandingPage";
 // import TryOn from "./components/TryOn"; 
