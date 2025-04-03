@@ -31,6 +31,7 @@ const AddBlog = ({ darkMode }) => {
                 user: localStorage.getItem("userId")
             });
 
+            console.log("Post Created:", res.data); // 🔍 Log full response
             return res.data;
         } catch (err) {
             console.error(err);

@@ -40,8 +40,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                     sx={{
                         fontFamily: "'Poppins', cursive",
                         fontWeight: "bold", 
-                        color: darkMode ? "#fff" : "#7e895e", 
-                        textShadow: "2px 2px 5px rgba(179, 182, 128, 0.8)", 
+                        color: darkMode ? "#C3D491" : "#7e895e", 
+                        textShadow: "2px 2px 5px rgba(179, 182, 128, 0.55)", 
                     }}
                 >
                     Pixelate
@@ -60,7 +60,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             to="/posts" 
                             label="All Posts"
                             sx={{
-                                fontFamily: "'Poppins', cusrive",
+                                fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
                                 color: darkMode ? "#F8F8FF" : "#7e895e", 
                                 "&:hover": {color: darkMode ? "#fff" : "#FF8FAB"}, 
@@ -71,7 +71,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                             to="/userposts" 
                             label="My Posts"
                             sx={{
-                                fontFamily: "'Poppins', cusrive",
+                                fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
                                 color: darkMode ? "#F8F8FF" : "#7e895e", 
                                 "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
@@ -82,18 +82,19 @@ const Header = ({ darkMode, setDarkMode }) => {
                             to="/posts/add" 
                             label="Add Posts"
                             sx={{
-                                fontFamily: "'Poppins', cusrive",
+                                fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
                                 color: darkMode ? "#F8F8FF" : "#7e895e", 
                                 "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
                             }}
                         />
+                        {/* New Tab for my Liked Posts */}
                         <Tab 
                             LinkComponent={Link} 
                             to="/liked" 
                             label="My Liked Posts" 
                             sx={{
-                                fontFamily: "'Poppins', cusrive",
+                                fontFamily: "'Poppins'",
                                 fontSize: "1rem", 
                                 color: darkMode ? "#F8F8FF" : "#7e895e", 
                                 "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
@@ -104,7 +105,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 to="/outfit" 
                                 label="Try-On"
                                 sx={{
-                                    fontFamily: "'Poppins', cusrive",
+                                    fontFamily: "'Poppins'",
                                     fontSize: "1rem", 
                                     color: darkMode ? "#F8F8FF" : "#7e895e", 
                                     "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
@@ -116,7 +117,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                                 to="/closet" 
                                 label="Closet"
                                 sx={{
-                                    fontFamily: "'Poppins', cusrive",
+                                    fontFamily: "'Poppins'",
                                     fontSize: "1rem", 
                                     color: darkMode ? "#F8F8FF" :  "#7e895e", 
                                     "&:hover": {color:  darkMode ? "#fff" : "#FF8FAB"}, 
