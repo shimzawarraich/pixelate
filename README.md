@@ -16,6 +16,7 @@ Before you start, ensure that you have the following installed on your computer:
 1. **Clone the repository** or download the project files to your local machine.
     ```bash
     git clone https://github.com/muskanmorshed/pixelate.git
+    cd pixelate
     ```
 ## Backend
 1. **Navigate to the backend directory**:
@@ -29,16 +30,15 @@ Before you start, ensure that you have the following installed on your computer:
 This will start the backend server.
 
 ## Frontend
-1. **Navigate to the backend directory**:
+Open a new terminal:
+1. **Navigate to the frontend directory**:
     ```bash
     cd frontend
     ```
 2. **Install dependencies**:
     ```bash
     npm install
-    npm install framer-motion
-    npm install @dnd-kit/core
-    npm install moment-timezone
+    npm install framer-motion @dnd-kit/core moment-timezone
     ```
 3. **Start the frontend server**:
     ```bash
