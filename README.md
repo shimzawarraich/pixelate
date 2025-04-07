@@ -55,7 +55,23 @@ This will open the frontend web application in your browser.
 
 ## Future Improvements
 - More clothing options for tbe try-on feature and closet
-##
+- Deploy website so that is accessible online
+- Posts can be deleted from `All Posts` page
+
+## Screenshots
+<div style="display: flex; justify-content: center; flex-wrap: wrap;">
+    <img src="./images/landing-screenshot.png" width="45%" />
+    <img src="./images/posts-screenshot.png" width="45%" />
+</div>
+
+<div style="display: flex; justify-content: center; flex-wrap: wrap;">
+    <img src="./images/darkmode-screenshot.png" width="30%" />
+    <img src="./images/closet-screenshot.png" width="30%" />
+    <img src="./images/try-on-screenshot.png" width="30%" />
+</div>
+Landing page, All Posts page, Dark mode on landing page, Closet feature, Try-On Feature
+
+
 ### Authors:
 - Malasa Khan
 - Mehreen Morshed
