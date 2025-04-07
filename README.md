@@ -72,7 +72,7 @@ This will open the frontend web application in your browser.
 Landing page, All Posts page, Dark mode on landing page, Closet feature, Try-On Feature
 
 
-### Authors:
+## Authors:
 - Malasa Khan
 - Mehreen Morshed
 - Muskan Morshed
