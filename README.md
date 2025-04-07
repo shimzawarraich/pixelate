@@ -23,7 +23,12 @@ Before you start, ensure that you have the following installed on your computer:
    ```bash
    cd backend
     ```
-2. **Start the backend server**:
+2. **Install dependencies**:
+    ```bash
+    npm install
+    npm install framer-motion @dnd-kit/core moment-timezone
+    ```
+3. **Start the backend server**:
     ```bash
     npm start
     ```
