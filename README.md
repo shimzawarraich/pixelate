@@ -82,3 +82,5 @@ Landing page, All Posts page, Dark mode on landing page, Closet feature, Try-On 
 - Mehreen Morshed
 - Muskan Morshed
 - Shimza Warraich
+
+This project was originally submitted as coursework for CSCI2040U Software Design and Analysis at Ontario Tech University, Winter 2025.
