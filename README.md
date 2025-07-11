@@ -59,8 +59,8 @@ This will open the frontend web application in your browser.
 - If the frontend does not open automatically, try navigating to `http://localhost:3000` or `http://localhost:3001` manually in your browser.
 
 ## Future Improvements
-- More clothing options for tbe try-on feature and closet
-- Deploy website so that is accessible online
+- More clothing options for the try-on feature and closet
+- Deploy website so that it is accessible online
 - Posts can be deleted from `All Posts` page
 
 ## Screenshots
