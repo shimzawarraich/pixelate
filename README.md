@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project so far includes a backend and frontend for a web app that handles user login and signup. Currently, the backend and frontend are not connected, but both parts work independently.
+Pixelate is a responsive full-stack fashion catalog web application that enables users to manage digital wardrobes, upload clothing items, and visualize outfits.
 
 ## Prerequisites
 
